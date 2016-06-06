@@ -8,6 +8,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        //Main Activity - Main Page
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -15,6 +17,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        //Sign In Activity - LAUNCHER ACTIVITY
         <activity android:name=".SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +26,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CreateProfileActivity" />
+
+        //Create Profile Activity
+        <activity android:name=".CreateProfileActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.CREATEPROFILE" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+        </activity>
+
         <activity android:name=".InboxActivity" />
         <activity android:name=".PendingRequestsActivity" />
         <activity android:name=".MaintenanceRequestActivity" />
