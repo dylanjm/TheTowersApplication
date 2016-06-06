@@ -25,9 +25,9 @@
         <activity android:name=".CreateProfileActivity" />
         <activity android:name=".InboxActivity" />
         <activity android:name=".PendingRequestsActivity" />
-        <activity android:name=".MaintenanceRequestActivity"></activity>
-        <activity android:name=".SubmitRequestActivity"></activity>
-        
+        <activity android:name=".MaintenanceRequestActivity" />
+        <activity android:name=".SubmitRequestActivity" />
+        <activity android:name=".ComposeMessageActivity"></activity>
     </application>
 
 </manifest>
