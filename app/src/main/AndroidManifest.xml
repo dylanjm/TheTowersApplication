@@ -27,6 +27,7 @@
         <activity android:name=".PendingRequestsActivity" />
         <activity android:name=".MaintenanceRequestActivity" />
         <activity android:name=".SubmitRequestActivity" />
+        <activity android:name=".ViewMessageActivity"></activity>
         <activity android:name=".ComposeMessageActivity"></activity>
     </application>
 
