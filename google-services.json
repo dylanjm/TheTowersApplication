@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "888072935661",
+    "firebase_url": "https://towers-app.firebaseio.com",
+    "project_id": "towers-app",
+    "storage_bucket": "towers-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:888072935661:android:11cd98787769b036",
+        "android_client_info": {
+          "package_name": "com.example.dylanmcdowell.thetowersapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "888072935661-4a20ljn5a0qqf2v3jb34rav89hapu0sl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzREDD30cED_VNYwseJTbnOIugv0IWakM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
