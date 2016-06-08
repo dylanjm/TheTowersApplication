@@ -22,4 +22,16 @@ public class ExampleUnitTest {
         Message testMessage = new Message ("YOU DIED");
         assertNotNull(testMessage);
     }
+    @Test
+    public void isUsernameString() throws Exception{
+        SignInActivity signIn = new SignInActivity();
+        signIn.setUsername("LEET_HAXOR");
+        assertNotNull(signIn.getUsername());
+    }
+    @Test
+    public void isPasswordString() throws Exception{
+        SignInActivity signIn = new SignInActivity();
+        signIn.setPassword("ILOVECHIUAHAS");
+        assertNotNull(signIn.getPassword());
+    }
 }
