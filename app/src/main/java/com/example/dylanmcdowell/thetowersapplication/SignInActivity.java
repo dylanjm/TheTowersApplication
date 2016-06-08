@@ -21,7 +21,6 @@ public class SignInActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent("android.intent.action.MAIN");
                 startActivity(intent);
-
             }
         });
 

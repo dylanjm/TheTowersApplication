@@ -12,4 +12,14 @@ public class ExampleUnitTest {
     public void addition_isCorrect() throws Exception {
         assertEquals(4, 2 + 2);
     }
+    @Test
+    public void isMessageString() throws Exception {
+        Message testMessage = new Message("Test Subject");
+        assertEquals(testMessage.getMessageSubject(), "Test Subject");
+    }
+    @Test
+    public void isBodyString() throws Exception {
+        Message testMessage = new Message ("YOU DIED");
+        assertNotNull(testMessage);
+    }
 }
