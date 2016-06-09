@@ -23,6 +23,7 @@ public class ExampleUnitTest {
         assertNotNull(testMessage);
     }
 
+    ///////////////////////////Samuel Tew///////////////////////////
     @Test
     public void isUserConstructed() throws Exception {
         User user = new User("Me", "You", "Them", "Theirs", "HERE", true, true, true, true);
@@ -34,11 +35,12 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void isSendMessage() throws Exception {
+    public void isUserMessageSend() throws Exception {
         User user = new User("Me", "You", "Them", "Theirs", "HERE", true, true, true, true);
         Message testMessage = new Message ("TEST");
         assertEquals(user.sendMessage(testMessage), testMessage);
     }
+    ///////////////////////////////////////////////////////////////////
 
     @Test
     public void isUsernameString() throws Exception{
