@@ -9,6 +9,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
     Button submitRequest;
     Button signOut;
+    Button inbox;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        submitRequest = (Button) findViewById(R.id.button3);
-        submitRequest.setOnClickListener(new View.OnClickListener() {
+        inbox = (Button) findViewById(R.id.button4);
+        inbox.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent("android.intent.action.COMPOSEMESSAGE");
                 startActivity(intent);
