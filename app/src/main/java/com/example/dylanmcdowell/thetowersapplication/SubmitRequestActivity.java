@@ -1,6 +1,5 @@
 package com.example.dylanmcdowell.thetowersapplication;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -20,8 +19,7 @@ public class SubmitRequestActivity extends AppCompatActivity {
         submit = (Button) findViewById(R.id.button);
         submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent intent = new Intent("android.intent.action.MAIN");
-                startActivity(intent);
+                finish();
 
             }
         });
@@ -30,8 +28,7 @@ public class SubmitRequestActivity extends AppCompatActivity {
         cancel = (Button) findViewById(R.id.button2);
         cancel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent intent = new Intent("android.intent.action.MAIN");
-                startActivity(intent);
+                finish();
             }
         });
     }

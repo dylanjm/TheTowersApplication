@@ -47,7 +47,13 @@
         </intent-filter>
         </activity>
         <activity android:name=".ViewMessageActivity"></activity>
-        <activity android:name=".ComposeMessageActivity"></activity>
+        <activity android:name=".ComposeMessageActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.COMPOSEMESSAGE" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+        </activity>
     </application>
 
 </manifest>

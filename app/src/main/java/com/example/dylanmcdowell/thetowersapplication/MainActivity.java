@@ -8,6 +8,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
     Button submitRequest;
+    Button signOut;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +20,21 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent("android.intent.action.SUBMITREQUEST");
                 startActivity(intent);
+            }
+        });
+
+        submitRequest = (Button) findViewById(R.id.button3);
+        submitRequest.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent("android.intent.action.COMPOSEMESSAGE");
+                startActivity(intent);
+            }
+        });
+
+        signOut = (Button) findViewById(R.id.button6);
+        signOut.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                finish();
             }
         });
     }
