@@ -39,7 +39,13 @@
         <activity android:name=".InboxActivity" />
         <activity android:name=".PendingRequestsActivity" />
         <activity android:name=".MaintenanceRequestActivity" />
-        <activity android:name=".SubmitRequestActivity" />
+        <activity android:name=".SubmitRequestActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.SUBMITREQUEST" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+        </activity>
         <activity android:name=".ViewMessageActivity"></activity>
         <activity android:name=".ComposeMessageActivity"></activity>
     </application>
