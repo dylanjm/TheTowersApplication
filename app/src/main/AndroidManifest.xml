@@ -36,17 +36,51 @@
         </intent-filter>
         </activity>
 
-        <activity android:name=".InboxActivity" />
-        <activity android:name=".PendingRequestsActivity" />
-        <activity android:name=".MaintenanceRequestActivity" />
-        <activity android:name=".SubmitRequestActivity">
+        //Inbox activity
+        <activity android:name=".InboxActivity">
         <intent-filter>
-            <action android:name="android.intent.action.SUBMITREQUEST" />
+            <action android:name="android.intent.action.INBOX" />
 
             <category android:name="android.intent.category.DEFAULT" />
         </intent-filter>
         </activity>
-        <activity android:name=".ViewMessageActivity"></activity>
+
+        //Pending Request Activity
+        <activity android:name=".PendingRequestsActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.PENDINGREQUESTS" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+        </activity>
+
+        // Maintenance Request Activity
+        <activity android:name=".MaintenanceRequestActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAINTENANCEREQUEST" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+        </activity>
+
+        //Submit Request Activity
+        <activity android:name=".SubmitRequestActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SUBMITREQUEST" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        //View Message Activity
+        <activity android:name=".ViewMessageActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEWMESSAGE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".ComposeMessageActivity">
         <intent-filter>
             <action android:name="android.intent.action.COMPOSEMESSAGE" />

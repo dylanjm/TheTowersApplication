@@ -10,6 +10,8 @@ public class MainActivity extends AppCompatActivity {
     Button submitRequest;
     Button signOut;
     Button inbox;
+    Button composeMessage;
+    Button viewRequests;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +29,23 @@ public class MainActivity extends AppCompatActivity {
         inbox = (Button) findViewById(R.id.button4);
         inbox.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                Intent intent = new Intent("android.intent.action.INBOX");
+                startActivity(intent);
+            }
+        });
+
+        composeMessage = (Button) findViewById(R.id.button7);
+        composeMessage.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
                 Intent intent = new Intent("android.intent.action.COMPOSEMESSAGE");
+                startActivity(intent);
+            }
+        });
+
+        viewRequests = (Button) findViewById(R.id.button5);
+        viewRequests.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent("android.intent.action.PENDINGREQUESTS");
                 startActivity(intent);
             }
         });

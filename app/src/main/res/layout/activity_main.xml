@@ -37,13 +37,22 @@
         android:id="@+id/button5"
         android:layout_below="@+id/button4"
         android:layout_centerHorizontal="true"
-        android:text="Button" />
+        android:text="View Maintenance Requests" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign Out"
         android:id="@+id/button6"
+        android:layout_below="@+id/button7"
+        android:layout_alignLeft="@+id/button4"
+        android:layout_alignStart="@+id/button4" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Compose Message"
+        android:id="@+id/button7"
         android:layout_below="@+id/button5"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>
