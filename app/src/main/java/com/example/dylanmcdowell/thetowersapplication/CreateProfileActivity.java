@@ -51,6 +51,9 @@ public class CreateProfileActivity extends AppCompatActivity {
             }
         };
 
+        /************************************************************************
+         * Save This Comment Block we might have to verify authentication later.
+         ************************************************************************/
        // mAuth.createUserWithEmailAndPassword("bobtony@firebase.com", "thetowers");
 //                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
 //                    @Override
@@ -67,8 +70,8 @@ public class CreateProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent("android.intent.action.MAIN");
                 // Create a handler to handle the result of the authentication
-                emailString = (EditText) findViewById(R.id.editText);
-                passwordString = (EditText) findViewById(R.id.editText2);
+                emailString = (EditText) findViewById(R.id.editText7);
+                passwordString = (EditText) findViewById(R.id.editText8);
                 email = emailString.getText().toString();
                 password = passwordString.getText().toString();
                 mAuth.createUserWithEmailAndPassword(email, password);
