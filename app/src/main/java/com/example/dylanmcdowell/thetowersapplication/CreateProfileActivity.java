@@ -36,7 +36,6 @@ public class CreateProfileActivity extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                 } else {
                     // User is signed out
@@ -69,8 +68,7 @@ public class CreateProfileActivity extends AppCompatActivity {
                 passwordString = (EditText) findViewById(R.id.editText8);
                 email = emailString.getText().toString();
                 password = passwordString.getText().toString();
-                //mAuth.createUserWithEmailAndPassword(email, password);
-                mAuth.createUserWithEmailAndPassword("bobtony@firebase.com", "thetowers");
+                mAuth.createUserWithEmailAndPassword(email, password);
                 startActivity(intent);
             }
         });
