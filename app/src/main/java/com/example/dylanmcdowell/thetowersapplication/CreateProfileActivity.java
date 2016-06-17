@@ -19,16 +19,18 @@ public class CreateProfileActivity extends AppCompatActivity {
         Firebase.setAndroidContext(this);
         setContentView(R.layout.activity_create_profile);
         final Firebase ref = new Firebase("https://towers-app.firebaseio.com");
-
+        ref.createUser("bobtony@firebase.com", "correcthorsebatterystaple", new Firebase.ValueResultHandler<Map<String, Object>>() {
+            @Override
+            public void onSuccess(Map<String, Object> result) {System.out.println("Successfully created user account with uid: " + result.get("uid"));}
+            @Override
+            public void onError(FirebaseError firebaseError) {System.out.println("FAIL");}
+        });
+        //try{Thread.sleep(20000);}
+        //catch(Exception e){e.printStackTrace();}
         createProfile = (Button) findViewById(R.id.button13);
         createProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                ref.createUser("bobtony@firebase.com", "correcthorsebatterystaple", new Firebase.ValueResultHandler<Map<String, Object>>() {
-                    @Override
-                    public void onSuccess(Map<String, Object> result) {System.out.println("Successfully created user account with uid: " + result.get("uid"));}
-                    @Override
-                    public void onError(FirebaseError firebaseError) {System.out.println("FAIL");}
-                });
+
                 finish();
             }
         });
