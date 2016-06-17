@@ -44,6 +44,8 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
+        mAuth = FirebaseAuth.getInstance();
+
         //Sign In Button
         signIn = (Button) findViewById(R.id.button);
         signIn.setOnClickListener(new View.OnClickListener() {
@@ -55,20 +57,21 @@ public class SignInActivity extends AppCompatActivity {
                 username = usernameTxt.getText().toString();
                 password = passwordTxt.getText().toString();
                 mAuth.signInWithEmailAndPassword(username, password);
-                mAuthListener = new FirebaseAuth.AuthStateListener() {
-                    @Override
-                    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                        FirebaseUser user = firebaseAuth.getCurrentUser();
-                        if (user != null) {
-                            // User is signed in
-                            startActivity(intent);
-                            System.out.println("AUTHENTICATION SUCCESS!!!!");
-                        } else {
-                            // User is signed out
-                            System.out.println("AUTHENTICATION FAILURE!!!!");
-                        }
-                    }
-                };
+                //mAuthListener = new FirebaseAuth.AuthStateListener() {
+//                    @Override
+//                    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+//                        FirebaseUser user = firebaseAuth.getCurrentUser();
+//                        if (user != null) {
+//                            // User is signed in
+//                            startActivity(intent);
+//                            System.out.println("AUTHENTICATION SUCCESS!!!!");
+//                        } else {
+//                            // User is signed out
+//                            System.out.println("AUTHENTICATION FAILURE!!!!");
+//                        }
+//                    }
+//                };
+                startActivity(intent);
 
             }
         });
