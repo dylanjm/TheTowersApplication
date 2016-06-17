@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
@@ -54,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         signOut = (Button) findViewById(R.id.button6);
         signOut.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
                 finish();
             }
         });
