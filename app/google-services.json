@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "888072935661-5am2lok5qfc9k16nu1m54g4iqadalb4p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dylanmcdowell.thetowersapplication",
+            "certificate_hash": "888FBE964C4169CF2258798EB71E3136FA9CE019"
+          }
+        },
+        {
           "client_id": "888072935661-4a20ljn5a0qqf2v3jb34rav89hapu0sl.apps.googleusercontent.com",
           "client_type": 3
         }
