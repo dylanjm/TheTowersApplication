@@ -8,16 +8,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.util.Map;
 
 public class CreateProfileActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -43,6 +36,7 @@ public class CreateProfileActivity extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
+
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                 } else {
                     // User is signed out
@@ -54,16 +48,7 @@ public class CreateProfileActivity extends AppCompatActivity {
         /************************************************************************
          * Save This Comment Block we might have to verify authentication later.
          ************************************************************************/
-       // mAuth.createUserWithEmailAndPassword("bobtony@firebase.com", "thetowers");
-//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
-//                        if (!task.isSuccessful()) {
-//                           Log.d(TAG, "Authentication failed.");
-//                        }
-//                    }
-//                });
+       //
 
 
         createProfile.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +59,8 @@ public class CreateProfileActivity extends AppCompatActivity {
                 passwordString = (EditText) findViewById(R.id.editText8);
                 email = emailString.getText().toString();
                 password = passwordString.getText().toString();
-                mAuth.createUserWithEmailAndPassword(email, password);
+                //mAuth.createUserWithEmailAndPassword(email, password);
+                mAuth.createUserWithEmailAndPassword("bobtony@firebase.com", "thetowers");
                 startActivity(intent);
             }
         });

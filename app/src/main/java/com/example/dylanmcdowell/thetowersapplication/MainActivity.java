@@ -9,8 +9,6 @@ import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.Map;
-
 public class MainActivity extends AppCompatActivity {
     Button submitRequest;
     Button signOut;
@@ -20,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Firebase.setAndroidContext(this);
+        //Firebase.setAndroidContext(this);
         setContentView(R.layout.activity_main);
         submitRequest = (Button) findViewById(R.id.button3);
         submitRequest.setOnClickListener(new View.OnClickListener() {
