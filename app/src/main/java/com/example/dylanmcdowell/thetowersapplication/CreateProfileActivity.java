@@ -48,6 +48,16 @@ public class CreateProfileActivity extends AppCompatActivity {
         /************************************************************************
          * Save This Comment Block we might have to verify authentication later.
          ************************************************************************/
+        // mAuth.createUserWithEmailAndPassword("bobtony@firebase.com", "thetowers");
+        //                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        //                    @Override
+        //                    public void onComplete(@NonNull Task<AuthResult> task) {
+        //                        Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
+        //                        if (!task.isSuccessful()) {
+        //                           Log.d(TAG, "Authentication failed.");
+        //                        }
+        //                    }
+        //                });
        //
 
 
