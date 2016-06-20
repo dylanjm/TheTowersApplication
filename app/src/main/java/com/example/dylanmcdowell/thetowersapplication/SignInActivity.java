@@ -2,7 +2,6 @@ package com.example.dylanmcdowell.thetowersapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -57,6 +56,15 @@ public class SignInActivity extends AppCompatActivity {
                 username = usernameTxt.getText().toString();
                 password = passwordTxt.getText().toString();
                 mAuth.signInWithEmailAndPassword(username, password);
+                FirebaseUser user = mAuth.getCurrentUser();
+                if (user != null) {
+                    //User is signed in
+                    startActivity(intent);
+                    System.out.println("AUTHENTICATION SUCCESS!!!!");
+                } else {
+                    // User is signed out
+                    System.out.println("AUTHENTICATION FAILURE!!!!");
+                }
                 //mAuthListener = new FirebaseAuth.AuthStateListener() {
 //                    @Override
 //                    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -71,7 +79,7 @@ public class SignInActivity extends AppCompatActivity {
 //                        }
 //                    }
 //                };
-                startActivity(intent);
+                //startActivity(intent);
 
             }
         });
