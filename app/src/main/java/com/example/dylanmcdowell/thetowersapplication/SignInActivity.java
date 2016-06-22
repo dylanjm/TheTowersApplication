@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -66,6 +67,9 @@ public class SignInActivity extends AppCompatActivity {
                 } else {
                     // User is signed out
                     Log.e(TAG, "AUTHENTICATION FAILURE!!!!");
+                    Toast.makeText(getApplication().getApplicationContext(), "User does not exist.",
+                            Toast.LENGTH_LONG).show();
+                    System.out.println("AUTHENTICATION FAILURE!!!!");
                 }
                 //mAuthListener = new FirebaseAuth.AuthStateListener() {
 //                    @Override

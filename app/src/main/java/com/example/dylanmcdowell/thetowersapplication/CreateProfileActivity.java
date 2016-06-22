@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -69,7 +70,18 @@ public class CreateProfileActivity extends AppCompatActivity {
                 email = emailString.getText().toString();
                 password = passwordString.getText().toString();
                 mAuth.createUserWithEmailAndPassword(email, password);
-                startActivity(intent);
+                FirebaseUser user = mAuth.getCurrentUser();
+                if (user != null) {
+                    //User is signed in
+                    startActivity(intent);
+                    Log.d(TAG, "AUTHENTICATION SUCCESS!!!!");
+                } else {
+                    Toast.makeText(getApplication(), "Something went wrong.",
+                            Toast.LENGTH_LONG).show();
+                    Log.d(TAG, "AUTHENTICATION FAILURE!!!!");
+                }
+
+
             }
         });
 
