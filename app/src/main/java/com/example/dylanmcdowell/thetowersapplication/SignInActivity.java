@@ -62,10 +62,10 @@ public class SignInActivity extends AppCompatActivity {
                 if (user != null) {
                     //User is signed in
                     startActivity(intent);
-                    Log.d(TAG, "AUTHENTICATION SUCCESS!!!!");
+                    Log.i(TAG, "AUTHENTICATION SUCCESS!!!!");
                 } else {
                     // User is signed out
-                    Log.d(TAG, "AUTHENTICATION FAILURE!!!!");
+                    Log.e(TAG, "AUTHENTICATION FAILURE!!!!");
                 }
                 //mAuthListener = new FirebaseAuth.AuthStateListener() {
 //                    @Override
