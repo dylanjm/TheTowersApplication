@@ -37,10 +37,10 @@ public class CreateProfileActivity extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    Log.i(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                 } else {
                     // User is signed out
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                    Log.i(TAG, "onAuthStateChanged:signed_out");
                 }
             }
         };
@@ -74,11 +74,11 @@ public class CreateProfileActivity extends AppCompatActivity {
                 if (user != null) {
                     //User is signed in
                     startActivity(intent);
-                    Log.d(TAG, "AUTHENTICATION SUCCESS!!!!");
+                    Log.i(TAG, "AUTHENTICATION SUCCESS!!!!");
                 } else {
                     Toast.makeText(getApplication(), "Something went wrong.",
                             Toast.LENGTH_LONG).show();
-                    Log.d(TAG, "AUTHENTICATION FAILURE!!!!");
+                    Log.e(TAG, "AUTHENTICATION FAILURE!!!!");
                 }
 
 

@@ -69,7 +69,7 @@ public class SignInActivity extends AppCompatActivity {
                     Log.e(TAG, "AUTHENTICATION FAILURE!!!!");
                     Toast.makeText(getApplication().getApplicationContext(), "User does not exist.",
                             Toast.LENGTH_LONG).show();
-                    System.out.println("AUTHENTICATION FAILURE!!!!");
+                    //Log.e(TAG, "AUTHENTICATION FAILURE!!!!");
                 }
                 //mAuthListener = new FirebaseAuth.AuthStateListener() {
 //                    @Override
