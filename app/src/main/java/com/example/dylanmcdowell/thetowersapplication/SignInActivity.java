@@ -2,6 +2,7 @@ package com.example.dylanmcdowell.thetowersapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -14,7 +15,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 
 public class SignInActivity extends AppCompatActivity {
-    private static final String TAG = CreateProfileActivity.class.getSimpleName();
+    private static final String TAG2 = SignInActivity.class.getSimpleName();
     private FirebaseAuth mAuth;
     Button signIn;
     Button createProfile;
@@ -23,70 +24,57 @@ public class SignInActivity extends AppCompatActivity {
     EditText usernameTxt;
     EditText passwordTxt;
     private FirebaseAuth.AuthStateListener mAuthListener;
-
-
-    void setUsername(String name){
-        username = name;
-    }
-
-    void setPassword(String pass){
-        password = pass;
-    }
-
-    String getUsername(){
-        return username;
-    }
-
-    String getPassword(){
-        return password;
-    }
+    final Intent intent = new Intent("android.intent.action.MAIN");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_sign_in);
 
         mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    Log.i(TAG2, "onAuthStateChanged:signed_in:" + user.getUid());
+                    startActivity(intent);
+
+                } else {
+                    // User is signed out
+                    Log.i(TAG2, "onAuthStateChanged:signed_out");
+                }
+            }
+        };
 
         //Sign In Button
         signIn = (Button) findViewById(R.id.button);
         signIn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                final Intent intent = new Intent("android.intent.action.MAIN");
                 // Create a handler to handle the result of the authentication
                 usernameTxt = (EditText) findViewById(R.id.editText);
                 passwordTxt = (EditText) findViewById(R.id.editText2);
                 username = usernameTxt.getText().toString();
                 password = passwordTxt.getText().toString();
                 mAuth.signInWithEmailAndPassword(username, password);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 FirebaseUser user = mAuth.getCurrentUser();
                 if (user != null) {
                     //User is signed in
                     startActivity(intent);
-                    Log.i(TAG, "AUTHENTICATION SUCCESS!!!!");
+                    Log.i(TAG2, "AUTHENTICATION SUCCESS!!!!");
                 } else {
                     // User is signed out
-                    Log.e(TAG, "AUTHENTICATION FAILURE!!!!");
+                    Log.e(TAG2, "AUTHENTICATION FAILURE!!!!");
                     Toast.makeText(getApplication().getApplicationContext(), "User does not exist.",
                             Toast.LENGTH_LONG).show();
-                    //Log.e(TAG, "AUTHENTICATION FAILURE!!!!");
                 }
-                //mAuthListener = new FirebaseAuth.AuthStateListener() {
-//                    @Override
-//                    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-//                        FirebaseUser user = firebaseAuth.getCurrentUser();
-//                        if (user != null) {
-//                            // User is signed in
-//                            startActivity(intent);
-//                            System.out.println("AUTHENTICATION SUCCESS!!!!");
-//                        } else {
-//                            // User is signed out
-//                            System.out.println("AUTHENTICATION FAILURE!!!!");
-//                        }
-//                    }
-//                };
-                //startActivity(intent);
-
             }
         });
 
@@ -99,4 +87,16 @@ public class SignInActivity extends AppCompatActivity {
             }
         });
     }
+        @Override
+        public void onStart() {
+            super.onStart();
+            mAuth.addAuthStateListener(mAuthListener);
+        }
+        @Override
+        public void onStop() {
+            super.onStop();
+            if (mAuthListener != null) {
+                mAuth.removeAuthStateListener(mAuthListener);
+            }
+        }
 }
