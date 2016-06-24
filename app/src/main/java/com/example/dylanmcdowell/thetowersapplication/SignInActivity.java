@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 
 public class SignInActivity extends AppCompatActivity {
-    private static final String TAG = CreateProfileActivity.class.getSimpleName();
+    private static final String TAG = "theTag";
     private FirebaseAuth mAuth;
     Button signIn;
     Button createProfile;
