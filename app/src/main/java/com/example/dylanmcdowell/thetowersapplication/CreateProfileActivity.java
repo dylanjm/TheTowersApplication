@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class CreateProfileActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private static final String TAG2 = CreateProfileActivity.class.getSimpleName();
+    private static final String TAG = "theTag";
     EditText emailString;
     EditText passwordString;
     Button createProfile;
@@ -37,10 +37,10 @@ public class CreateProfileActivity extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-                    Log.i(TAG2, "onAuthStateChanged:signed_in:" + user.getUid());
+                    Log.i(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                 } else {
                     // User is signed out
-                    Log.i(TAG2, "onAuthStateChanged:signed_out");
+                    Log.i(TAG, "onAuthStateChanged:signed_out");
                 }
             }
         };
@@ -74,11 +74,11 @@ public class CreateProfileActivity extends AppCompatActivity {
                 if (user != null) {
                     //User is signed in
                     startActivity(intent);
-                    Log.i(TAG2, "AUTHENTICATION SUCCESS!!!!");
+                    Log.i(TAG, "AUTHENTICATION SUCCESS!!!!");
                 } else {
                     Toast.makeText(getApplication(), "Something went wrong.",
                             Toast.LENGTH_LONG).show();
-                    Log.e(TAG2, "AUTHENTICATION FAILURE!!!!");
+                    Log.e(TAG, "AUTHENTICATION FAILURE!!!!");
                 }
 
 

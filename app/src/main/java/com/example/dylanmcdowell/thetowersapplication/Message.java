@@ -4,18 +4,28 @@ package com.example.dylanmcdowell.thetowersapplication;
  * Created by Sam on 2016-06-08.
  */
 public class Message {
-    private String messageSubject;
-    private String messageBody;
+    private String subject;
+    private String body;
+    private String author;
 
-    public String getMessageSubject(){
-        return messageSubject;
+    Message(String body, String subject, String author) {
+        this.subject = subject;
+        this.body = body;
+        this.author = author;
     }
 
-    public String getMessageBody(){
-        return messageBody;
+    @SuppressWarnings("unused")
+    private Message() {
     }
 
-    public Message(String theSubject){
-        messageSubject = theSubject;
+    public String getSubject(){
+        return subject;
     }
+
+    public String getBody(){
+        return body;
+    }
+
+    public String getAuthor() { return author; }
+
 }
