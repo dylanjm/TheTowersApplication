@@ -25,15 +25,15 @@ public class ComposeMessageActivity extends AppCompatActivity {
         final DatabaseReference myRef = database.getReference("message");
 
         send = (Button) findViewById(R.id.button11);
-        topicString = (EditText) findViewById(R.id.editText3);
-        messageString = (EditText) findViewById(R.id.editText4);
+        topicString = (EditText) findViewById(R.id.editText4);
+        messageString = (EditText) findViewById(R.id.editText3);
         send.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 if (!messageString.equals("")) {
                     // Create our 'model', a Chat object
                     String subject = topicString.getText().toString();
                     String body = messageString.getText().toString();
-                    System.out.println(subject + body);
+                    System.out.println("Subject: " + subject + "\nBody: " + body);
                     Message chat = new Message(subject, body, "BILL");
                     // Create a new, auto-generated child of that chat location, and save our chat data there
                     myRef.push().setValue(chat);
