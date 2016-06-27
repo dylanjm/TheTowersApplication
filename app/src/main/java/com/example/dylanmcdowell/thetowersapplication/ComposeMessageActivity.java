@@ -34,6 +34,11 @@ public class ComposeMessageActivity extends AppCompatActivity {
             Message chat = new Message(subject, body, "BILL");
             // Create a new, auto-generated child of that chat location, and save our chat data there
             myRef.push().setValue(chat);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             topicString.setText("");
             messageString.setText("");
         }
