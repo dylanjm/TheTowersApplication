@@ -16,7 +16,6 @@ public class ComposeMessageActivity extends AppCompatActivity {
     Button send;
     String topic;
     String message;
-    //String recipient;
     private static final String FIREBASE_URL = "https://android-chat.firebaseio-demo.com";
 
     @Override
@@ -30,6 +29,8 @@ public class ComposeMessageActivity extends AppCompatActivity {
         topicString = (EditText) findViewById(R.id.editText3);
         recipientString = (EditText) findViewById(R.id.editText9);
         messageString = (EditText) findViewById(R.id.editText4);
+        topicString = (EditText) findViewById(R.id.editText4);
+        messageString = (EditText) findViewById(R.id.editText3);
         send.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 if (!messageString.equals("")) {
@@ -40,6 +41,8 @@ public class ComposeMessageActivity extends AppCompatActivity {
                     DatabaseReference myRef = database.getReference(recipient);
                     System.out.println(subject + body);
                     Message chat = new Message(subject, body, recipient);
+                    System.out.println("Subject: " + subject + "\nBody: " + body);
+                    Message chat = new Message(subject, body, "BILL");
                     // Create a new, auto-generated child of that chat location, and save our chat data there
                     myRef.push().setValue(chat);
                     try {
