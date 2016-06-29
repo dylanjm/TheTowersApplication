@@ -4,11 +4,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 
 public class SubmitRequestActivity extends AppCompatActivity {
 
     Button submit;
     Button cancel;
+    CheckBox checkbox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,5 +33,9 @@ public class SubmitRequestActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        checkbox = (CheckBox) findViewById(R.id.checkBox);
+
+
     }
 }

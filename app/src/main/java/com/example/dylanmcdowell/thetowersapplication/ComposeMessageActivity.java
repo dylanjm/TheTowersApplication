@@ -14,8 +14,6 @@ public class ComposeMessageActivity extends AppCompatActivity {
     EditText messageString;
     EditText recipientString;
     Button send;
-    String topic;
-    String message;
     private static final String FIREBASE_URL = "https://android-chat.firebaseio-demo.com";
 
     @Override
@@ -23,12 +21,10 @@ public class ComposeMessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compose_message);
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference myRef = database.getReference("message");
+        //final DatabaseReference myRef = database.getReference("message");
 
         send = (Button) findViewById(R.id.button11);
-        topicString = (EditText) findViewById(R.id.editText3);
         recipientString = (EditText) findViewById(R.id.editText9);
-        messageString = (EditText) findViewById(R.id.editText4);
         topicString = (EditText) findViewById(R.id.editText4);
         messageString = (EditText) findViewById(R.id.editText3);
         send.setOnClickListener(new View.OnClickListener() {
@@ -40,9 +36,7 @@ public class ComposeMessageActivity extends AppCompatActivity {
                     String recipient = recipientString.getText().toString();
                     DatabaseReference myRef = database.getReference(recipient);
                     System.out.println(subject + body);
-                    Message chat = new Message(subject, body, recipient);
-                    System.out.println("Subject: " + subject + "\nBody: " + body);
-                    Message chat = new Message(subject, body, "BILL");
+                    Message chat = new Message(subject, body, "Yo momma", recipient);
                     // Create a new, auto-generated child of that chat location, and save our chat data there
                     myRef.push().setValue(chat);
                     try {

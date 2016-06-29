@@ -6,12 +6,14 @@ package com.example.dylanmcdowell.thetowersapplication;
 public class Message {
     private String subject;
     private String body;
+    private String recipient;
     private String author;
 
-    Message(String subject, String body, String author) {
-        this.subject = subject;
-        this.body = body;
-        this.author = author;
+    Message(String theSubject, String theBody, String theAuthor, String theRecipient) {
+        this.subject = theSubject;
+        this.body = theBody;
+        this.author = theAuthor;
+        this.recipient = theRecipient;
     }
 
     @SuppressWarnings("unused")
@@ -27,5 +29,7 @@ public class Message {
     }
 
     public String getAuthor() { return author; }
+
+    public String getRecipient() { return recipient; }
 
 }
