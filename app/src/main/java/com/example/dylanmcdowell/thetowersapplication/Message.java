@@ -9,7 +9,16 @@ public class Message {
     private String recipient;
     private String author;
 
-    Message(String theSubject, String theBody, String theAuthor, String theRecipient) {
+    /**
+     * Public Constructor for a message object
+     * @author Sam Ciavardini
+     * @version 1.0
+     * @param theSubject
+     * @param theBody
+     * @param theAuthor
+     * @param theRecipient
+     */
+    public Message(String theSubject, String theBody, String theAuthor, String theRecipient) {
         this.subject = theSubject;
         this.body = theBody;
         this.author = theAuthor;
@@ -20,16 +29,36 @@ public class Message {
     private Message() {
     }
 
+    /**
+     * Getter for the subject
+     * @author Sam Ciavardini
+     * @return subject
+     */
     public String getSubject(){
         return subject;
     }
 
+    /**
+     * Getter for the body
+     * @author Sam Ciavardini
+     * @return body
+     */
     public String getBody(){
         return body;
     }
 
+    /**
+     * Getter for the author
+     * @author Sam Ciavardini
+     * @return author
+     */
     public String getAuthor() { return author; }
 
+    /**
+     * Getter for the recipient
+     * @author Sam Ciavardini
+     * @return recipient
+     */
     public String getRecipient() { return recipient; }
 
 }
