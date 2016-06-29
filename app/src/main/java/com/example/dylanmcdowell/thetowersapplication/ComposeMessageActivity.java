@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -23,6 +25,10 @@ public class ComposeMessageActivity extends AppCompatActivity {
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         //final DatabaseReference myRef = database.getReference("message");
 
+        FirebaseAuth fauth = FirebaseAuth.getInstance();
+        FirebaseUser user = fauth.getCurrentUser();
+        final String username =  user.getEmail();
+
         send = (Button) findViewById(R.id.button11);
         recipientString = (EditText) findViewById(R.id.editText9);
         topicString = (EditText) findViewById(R.id.editText4);
@@ -34,9 +40,10 @@ public class ComposeMessageActivity extends AppCompatActivity {
                     String subject = topicString.getText().toString();
                     String body = messageString.getText().toString();
                     String recipient = recipientString.getText().toString();
+                    recipient = "Users/" + recipient + "/messages";
                     DatabaseReference myRef = database.getReference(recipient);
                     System.out.println(subject + body);
-                    Message chat = new Message(subject, body, "Yo momma", recipient);
+                    Message chat = new Message(subject, body, username, recipient);
                     // Create a new, auto-generated child of that chat location, and save our chat data there
                     myRef.push().setValue(chat);
                     try {
