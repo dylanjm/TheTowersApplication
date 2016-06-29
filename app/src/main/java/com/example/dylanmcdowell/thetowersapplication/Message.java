@@ -2,12 +2,15 @@ package com.example.dylanmcdowell.thetowersapplication;
 
 /**
  * Created by Sam on 2016-06-08.
+ * Message class. Contains a sender, a subject heading, a main body, and a recipient.
+ * @version 1.0
+ * @author Sam Ciavardini
  */
 public class Message {
     private String subject;
     private String body;
     private String recipient;
-    private String author;
+    private String sender;
 
     /**
      * Public Constructor for a message object
@@ -15,13 +18,13 @@ public class Message {
      * @version 1.0
      * @param theSubject
      * @param theBody
-     * @param theAuthor
+     * @param theSender
      * @param theRecipient
      */
-    public Message(String theSubject, String theBody, String theAuthor, String theRecipient) {
+    public Message(String theSubject, String theBody, String theSender, String theRecipient) {
         this.subject = theSubject;
         this.body = theBody;
-        this.author = theAuthor;
+        this.sender = theSender;
         this.recipient = theRecipient;
     }
 
@@ -48,11 +51,11 @@ public class Message {
     }
 
     /**
-     * Getter for the author
+     * Getter for the sender
      * @author Sam Ciavardini
-     * @return author
+     * @return sender
      */
-    public String getAuthor() { return author; }
+    public String getSender() { return sender; }
 
     /**
      * Getter for the recipient

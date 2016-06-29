@@ -2,11 +2,15 @@ package com.example.dylanmcdowell.thetowersapplication;
 
 /**
  * Created by Sam on 2016-06-27.
+ * Request class. Contains a sender, a subject heading, a main body, and a Boolean value to indicate
+ * whether or not it is an emergency
+ * @version 1.0
+ * @author Sam Ciavardini
  */
 public class Request {
         private String subject;
         private String body;
-        private String author;
+        private String sender;
         private Boolean isEmergency;
 
 
@@ -16,13 +20,13 @@ public class Request {
      * @version 1.0
      * @param theSubject
      * @param theBody
-     * @param theAuthor
+     * @param theSender
      * @param emergency
      */
-        public Request(String theSubject, String theBody, String theAuthor, Boolean emergency) {
+        public Request(String theSubject, String theBody, String theSender, Boolean emergency) {
             this.subject = theSubject;
             this.body = theBody;
-            this.author = theAuthor;
+            this.sender = theSender;
             this.isEmergency = emergency;
         }
 
@@ -50,7 +54,7 @@ public class Request {
      *  getter for author
      * @return author
      */
-        public String getAuthor() { return author; }
+        public String getSender() { return sender; }
 
     /**
      * getter for emergency status
