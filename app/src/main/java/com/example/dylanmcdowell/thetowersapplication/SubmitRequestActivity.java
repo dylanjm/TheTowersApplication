@@ -7,8 +7,11 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
 
 public class SubmitRequestActivity extends AppCompatActivity {
 
@@ -27,6 +30,9 @@ public class SubmitRequestActivity extends AppCompatActivity {
         topicString = (EditText) findViewById(R.id.editText6);
         messageString = (EditText) findViewById(R.id.editText5);
         checkbox = (CheckBox) findViewById(R.id.checkbox);
+        FirebaseAuth fauth = FirebaseAuth.getInstance();
+        FirebaseUser user = fauth.getCurrentUser();
+        final String username =  user.getEmail();
 
         //submit button
         submit = (Button) findViewById(R.id.button);
@@ -38,7 +44,7 @@ public class SubmitRequestActivity extends AppCompatActivity {
 
                 DatabaseReference myRef = database.getReference("Requests");
                 System.out.println(subject + body);
-                Request request = new Request(subject, body, "Yo momma", emergency);
+                Request request = new Request(subject, body, username, emergency);
                 // Create a new, auto-generated child of that chat location, and save our chat data there
                 myRef.push().setValue(request);
                 try {
