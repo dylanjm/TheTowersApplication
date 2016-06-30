@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -15,11 +16,13 @@ import com.google.firebase.database.ValueEventListener;
 public class InboxActivity extends AppCompatActivity {
     Button sampleMessage;
     Message message;
+    TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inbox);
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        textView = (TextView) findViewById(R.id.textView9);
         mDatabase.child("users").child("Sam Ciavardini").child("messages").addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
@@ -35,6 +38,7 @@ public class InboxActivity extends AppCompatActivity {
                         //Log.w(TAG4, "getUser:onCancelled", databaseError.toException());
                     }
                 });
+        textView.setText("lmao");
 
         sampleMessage = (Button) findViewById(R.id.button10);
         sampleMessage.setOnClickListener(new View.OnClickListener() {
