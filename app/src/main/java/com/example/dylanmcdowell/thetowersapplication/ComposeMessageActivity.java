@@ -12,8 +12,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class ComposeMessageActivity extends AppCompatActivity {
-    FirebaseAuth firebaseAuth;
-    FirebaseUser user = firebaseAuth.getCurrentUser();
     EditText topicString;
     EditText messageString;
     EditText recipientString;
@@ -53,8 +51,9 @@ public class ComposeMessageActivity extends AppCompatActivity {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    //topicString.setText("");
-                    //messageString.setText("");
+                    topicString.setText("");
+                    messageString.setText("");
+                    recipientString.setText("");
                 }
             }
         });
