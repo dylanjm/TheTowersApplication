@@ -15,7 +15,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class InboxActivity extends AppCompatActivity {
     Button sampleMessage;
-    Message message;
+    //Message message;
     TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,13 +23,18 @@ public class InboxActivity extends AppCompatActivity {
         setContentView(R.layout.activity_inbox);
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         textView = (TextView) findViewById(R.id.textView9);
-        mDatabase.child("users").child("Sam Ciavardini").child("messages").addListenerForSingleValueEvent(
+        //Query query = new Query().endAt("z");
+        mDatabase.child("Users").child("Sam Ciavardini").child("messages").addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         // Get user value
-                        message = dataSnapshot.getValue(Message.class);
-
+                        dataSnapshot.getChildren();
+                        Iterable ayy;
+                        ayy = dataSnapshot.getChildren();
+                        Message message = dataSnapshot.getValue(Message.class);
+                        //String wat = message.getSubject();
+                        textView.setText(message.getSubject());
                         // .
                     }
 
@@ -38,7 +43,8 @@ public class InboxActivity extends AppCompatActivity {
                         //Log.w(TAG4, "getUser:onCancelled", databaseError.toException());
                     }
                 });
-        textView.setText("lmao");
+        //String ayy = message.getSubject();
+        //textView.setText(ayy);
 
         sampleMessage = (Button) findViewById(R.id.button10);
         sampleMessage.setOnClickListener(new View.OnClickListener() {
