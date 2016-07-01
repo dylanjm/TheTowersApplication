@@ -6,10 +6,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class ComposeMessageActivity extends AppCompatActivity {
+    FirebaseAuth firebaseAuth;
+    FirebaseUser user = firebaseAuth.getCurrentUser();
     EditText topicString;
     EditText messageString;
     Button send;
@@ -34,7 +38,7 @@ public class ComposeMessageActivity extends AppCompatActivity {
                     String subject = topicString.getText().toString();
                     String body = messageString.getText().toString();
                     System.out.println("Subject: " + subject + "\nBody: " + body);
-                    Message chat = new Message(subject, body, "BILL");
+                    Message chat = new Message(subject, body, user.getUid());
                     // Create a new, auto-generated child of that chat location, and save our chat data there
                     myRef.push().setValue(chat);
                     try {
