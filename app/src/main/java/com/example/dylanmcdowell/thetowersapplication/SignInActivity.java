@@ -74,10 +74,7 @@ public class SignInActivity extends AppCompatActivity {
                         // User is signed out
                         Log.e(TAG2, "AUTHENTICATION FAILURE!!!!");
                         Toast.makeText(getApplication().getApplicationContext(), "User does not exist.",
-                                Toast.LENGTH_LONG).show();
-
-                       // if ((username == null) || (password == null))
-                                             }
+                                Toast.LENGTH_LONG).show();                     }
                 }
                 else
                 {
