@@ -16,19 +16,23 @@ public class ComposeMessageActivity extends AppCompatActivity {
     FirebaseUser user = firebaseAuth.getCurrentUser();
     EditText topicString;
     EditText messageString;
+    EditText recipientString;
     Button send;
-    String topic;
-    String message;
     private static final String FIREBASE_URL = "https://android-chat.firebaseio-demo.com";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compose_message);
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference myRef = database.getReference("message");
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        //final DatabaseReference myRef = database.getReference("message");
+
+        FirebaseAuth fauth = FirebaseAuth.getInstance();
+        FirebaseUser user = fauth.getCurrentUser();
+        final String username =  user.getEmail();
 
         send = (Button) findViewById(R.id.button11);
+        recipientString = (EditText) findViewById(R.id.editText9);
         topicString = (EditText) findViewById(R.id.editText4);
         messageString = (EditText) findViewById(R.id.editText3);
         send.setOnClickListener(new View.OnClickListener() {
@@ -37,8 +41,11 @@ public class ComposeMessageActivity extends AppCompatActivity {
                     // Create our 'model', a Chat object
                     String subject = topicString.getText().toString();
                     String body = messageString.getText().toString();
-                    System.out.println("Subject: " + subject + "\nBody: " + body);
-                    Message chat = new Message(subject, body, user.getUid());
+                    String recipient = recipientString.getText().toString();
+                    recipient = "Users/" + recipient + "/messages";
+                    DatabaseReference myRef = database.getReference(recipient);
+                    System.out.println(subject + body);
+                    Message chat = new Message(subject, body, username, recipient);
                     // Create a new, auto-generated child of that chat location, and save our chat data there
                     myRef.push().setValue(chat);
                     try {
