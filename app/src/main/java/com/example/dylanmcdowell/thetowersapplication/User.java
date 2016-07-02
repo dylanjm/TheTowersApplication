@@ -6,10 +6,8 @@ package com.example.dylanmcdowell.thetowersapplication;
  */
 public class User {
 
-    User(String user, String pass, String first, String last, String apt,
+    User(String first, String last, String apt,
          Boolean isMaint, Boolean isMan, Boolean isTen, Boolean islog) {
-        username = user;
-        password = pass;
         firstName = first;
         lastName = last;
         aptNumber = apt;
@@ -19,8 +17,7 @@ public class User {
         logged = islog;
     }
 
-    String username;
-    String password;
+
     String firstName;
     String lastName;
     String aptNumber;
@@ -63,13 +60,6 @@ public class User {
         // Remove a message from the message stack
     }
 
-    String getUsername() {
-        return username;
-    }
-
-    String getPassword() {
-        return password;
-    }
 
     String getFirstName() {
         return firstName;

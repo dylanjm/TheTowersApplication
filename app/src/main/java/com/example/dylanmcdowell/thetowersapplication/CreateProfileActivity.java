@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class CreateProfileActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -29,6 +31,7 @@ public class CreateProfileActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_create_profile);
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
         createProfile = (Button) findViewById(R.id.button13);
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -70,6 +73,9 @@ public class CreateProfileActivity extends AppCompatActivity {
                 email = emailString.getText().toString();
                 password = passwordString.getText().toString();
                 mAuth.createUserWithEmailAndPassword(email, password);
+                String base = "Names";
+                DatabaseReference myRef = database.getReference(base);
+
                 FirebaseUser user = mAuth.getCurrentUser();
                 if (user != null) {
                     //User is signed in
