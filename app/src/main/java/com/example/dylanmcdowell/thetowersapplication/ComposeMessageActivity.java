@@ -51,8 +51,9 @@ public class ComposeMessageActivity extends AppCompatActivity {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    //topicString.setText("");
-                    //messageString.setText("");
+                    topicString.setText("");
+                    messageString.setText("");
+                    recipientString.setText("");
                 }
             }
         });

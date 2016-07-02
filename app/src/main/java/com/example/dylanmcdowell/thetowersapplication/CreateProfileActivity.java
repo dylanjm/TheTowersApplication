@@ -61,13 +61,15 @@ public class CreateProfileActivity extends AppCompatActivity {
         //                        }
         //                    }
         //                });
-       //
+        //
 
 
         createProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent("android.intent.action.MAIN");
                 // Create a handler to handle the result of the authentication
+                if((emailString != null) && (passwordString != null))
+                {
                 emailString = (EditText) findViewById(R.id.editText7);
                 passwordString = (EditText) findViewById(R.id.editText8);
                 email = emailString.getText().toString();
@@ -88,6 +90,12 @@ public class CreateProfileActivity extends AppCompatActivity {
                 }
 
 
+            }
+                else
+                {
+                    Toast.makeText(getApplication(), "One or more of the required inputs have been left blank.",
+                            Toast.LENGTH_LONG).show();
+                }
             }
         });
 

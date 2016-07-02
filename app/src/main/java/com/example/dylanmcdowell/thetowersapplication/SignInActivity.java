@@ -53,26 +53,32 @@ public class SignInActivity extends AppCompatActivity {
         signIn = (Button) findViewById(R.id.button);
         signIn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                // Create a handler to handle the result of the authentication
-                usernameTxt = (EditText) findViewById(R.id.editText);
-                passwordTxt = (EditText) findViewById(R.id.editText2);
-                username = usernameTxt.getText().toString();
-                password = passwordTxt.getText().toString();
-                mAuth.signInWithEmailAndPassword(username, password);
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                if ((usernameTxt != null) && (passwordTxt != null)) {
+                    // Create a handler to handle the result of the authentication
+                    usernameTxt = (EditText) findViewById(R.id.editText);
+                    passwordTxt = (EditText) findViewById(R.id.editText2);
+                    username = usernameTxt.getText().toString();
+                    password = passwordTxt.getText().toString();
+                    mAuth.signInWithEmailAndPassword(username, password);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    if (user != null) {
+                        //User is signed in
+                        startActivity(intent);
+                        Log.i(TAG2, "AUTHENTICATION SUCCESS!!!!");
+                    } else {
+                        // User is signed out
+                        Log.e(TAG2, "AUTHENTICATION FAILURE!!!!");
+                        Toast.makeText(getApplication().getApplicationContext(), "User does not exist.",
+                                Toast.LENGTH_LONG).show();                     }
                 }
-                FirebaseUser user = mAuth.getCurrentUser();
-                if (user != null) {
-                    //User is signed in
-                    startActivity(intent);
-                    Log.i(TAG2, "AUTHENTICATION SUCCESS!!!!");
-                } else {
-                    // User is signed out
-                    Log.e(TAG2, "AUTHENTICATION FAILURE!!!!");
-                    Toast.makeText(getApplication().getApplicationContext(), "User does not exist.",
+                else
+                {
+                    Toast.makeText(getApplication().getApplicationContext(), "No user and or password input.",
                             Toast.LENGTH_LONG).show();
                 }
             }
