@@ -53,10 +53,10 @@ public class SignInActivity extends AppCompatActivity {
         signIn = (Button) findViewById(R.id.button);
         signIn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                if ((usernameTxt != null) && (passwordTxt != null)) {
                     // Create a handler to handle the result of the authentication
                     usernameTxt = (EditText) findViewById(R.id.editText);
                     passwordTxt = (EditText) findViewById(R.id.editText2);
+                    if ((usernameTxt != null) && (passwordTxt != null)) {
                     username = usernameTxt.getText().toString();
                     password = passwordTxt.getText().toString();
                     mAuth.signInWithEmailAndPassword(username, password);
@@ -74,7 +74,8 @@ public class SignInActivity extends AppCompatActivity {
                         // User is signed out
                         Log.e(TAG2, "AUTHENTICATION FAILURE!!!!");
                         Toast.makeText(getApplication().getApplicationContext(), "User does not exist.",
-                                Toast.LENGTH_LONG).show();                     }
+                                Toast.LENGTH_LONG).show();
+                        }
                 }
                 else
                 {
