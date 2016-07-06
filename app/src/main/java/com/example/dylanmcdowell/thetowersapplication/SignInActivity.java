@@ -32,7 +32,6 @@ public class SignInActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_sign_in);
 
-        mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -41,7 +40,6 @@ public class SignInActivity extends AppCompatActivity {
                     // User is signed in
                     Log.i(TAG2, "onAuthStateChanged:signed_in:" + user.getUid());
                     startActivity(intent);
-
                 } else {
                     // User is signed out
                     Log.i(TAG2, "onAuthStateChanged:signed_out");
@@ -56,32 +54,32 @@ public class SignInActivity extends AppCompatActivity {
                     // Create a handler to handle the result of the authentication
                     usernameTxt = (EditText) findViewById(R.id.editText);
                     passwordTxt = (EditText) findViewById(R.id.editText2);
-                    if ((usernameTxt != null) && (passwordTxt != null)) {
-                    username = usernameTxt.getText().toString();
-                    password = passwordTxt.getText().toString();
-                    mAuth.signInWithEmailAndPassword(username, password);
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    if (user != null) {
-                        //User is signed in
-                        startActivity(intent);
-                        Log.i(TAG2, "AUTHENTICATION SUCCESS!!!!");
-                    } else {
-                        // User is signed out
-                        Log.e(TAG2, "AUTHENTICATION FAILURE!!!!");
-                        Toast.makeText(getApplication().getApplicationContext(), "User does not exist.",
+                    try{
+                        username = usernameTxt.getText().toString();
+                        password = passwordTxt.getText().toString();
+                        mAuth.signInWithEmailAndPassword(username, password);
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        if (user != null) {
+                            //User is signed in
+                            startActivity(intent);
+                            Log.i(TAG2, "AUTHENTICATION SUCCESS!!!!");
+                        }
+                        else {
+                            // User is signed out
+                            Log.e(TAG2, "AUTHENTICATION FAILURE!!!!");
+                            Toast.makeText(getApplication().getApplicationContext(), "User does not exist.",
                                 Toast.LENGTH_LONG).show();
                         }
-                }
-                else
-                {
-                    Toast.makeText(getApplication().getApplicationContext(), "No user and or password input.",
+                    }
+                    catch (Exception e) {
+                        Toast.makeText(getApplication().getApplicationContext(), "Empty Fields!",
                             Toast.LENGTH_LONG).show();
-                }
+                    }
             }
         });
 
