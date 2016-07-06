@@ -68,7 +68,7 @@ public class CreateProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent("android.intent.action.MAIN");
                 // Create a handler to handle the result of the authentication
-                if((emailString != null) && (passwordString != null))
+                try
                 {
                 emailString = (EditText) findViewById(R.id.editText7);
                 passwordString = (EditText) findViewById(R.id.editText8);
@@ -90,8 +90,7 @@ public class CreateProfileActivity extends AppCompatActivity {
                 }
 
 
-            }
-                else
+            } catch (Exception e)
                 {
                     Toast.makeText(getApplication(), "One or more of the required inputs have been left blank.",
                             Toast.LENGTH_LONG).show();
