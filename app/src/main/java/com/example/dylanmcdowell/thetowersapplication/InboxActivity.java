@@ -68,7 +68,7 @@ public class InboxActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Bundle bundle = new Bundle();
-                //bundle.putString("subject", .getSubject());
+                //bundle.putString("subject", view.;
                 Intent intent = new Intent("android.intent.action.VIEWMESSAGE");
                 startActivity(intent);
             }
