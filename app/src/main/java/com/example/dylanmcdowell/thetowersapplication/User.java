@@ -17,6 +17,12 @@ public class User {
         logged = islog;
     }
 
+    User(String first, String last, String apt){
+        firstName = first;
+        lastName = last;
+        aptNumber = apt;
+    }
+
 
     String firstName;
     String lastName;

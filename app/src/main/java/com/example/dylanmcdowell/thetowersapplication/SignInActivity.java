@@ -59,7 +59,7 @@ public class SignInActivity extends AppCompatActivity {
                         password = passwordTxt.getText().toString();
                         mAuth.signInWithEmailAndPassword(username, password);
                         try {
-                            Thread.sleep(1000);
+                            Thread.sleep(10000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }

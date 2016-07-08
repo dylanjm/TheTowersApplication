@@ -21,9 +21,15 @@ public class CreateProfileActivity extends AppCompatActivity {
     private static final String TAG = "theTag";
     EditText emailString;
     EditText passwordString;
+    EditText firstNameField;
+    EditText lastNameField;
+    EditText apartmentField;
     Button createProfile;
     String email;
     String password;
+    String firstName;
+    String lastName;
+    String apartment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,27 +76,47 @@ public class CreateProfileActivity extends AppCompatActivity {
                 // Create a handler to handle the result of the authentication
                 try
                 {
-                emailString = (EditText) findViewById(R.id.editText7);
-                passwordString = (EditText) findViewById(R.id.editText8);
-                email = emailString.getText().toString();
-                password = passwordString.getText().toString();
-                mAuth.createUserWithEmailAndPassword(email, password);
-                String base = "Names";
-                DatabaseReference myRef = database.getReference(base);
+                    emailString = (EditText) findViewById(R.id.editText7);
+                    passwordString = (EditText) findViewById(R.id.editText8);
+                    firstNameField = (EditText) findViewById(R.id.editText10);
+                    lastNameField = (EditText) findViewById(R.id.editText11);
+                    apartmentField = (EditText) findViewById(R.id.editText12);
+                    email = emailString.getText().toString();
+                    password = passwordString.getText().toString();
+                    firstName = firstNameField.getText().toString();
+                    lastName = lastNameField.getText().toString();
+                    apartment = apartmentField.getText().toString();
 
-                FirebaseUser user = mAuth.getCurrentUser();
-                if (user != null) {
-                    //User is signed in
-                    startActivity(intent);
-                    Log.i(TAG, "AUTHENTICATION SUCCESS!!!!");
-                } else {
-                    Toast.makeText(getApplication(), "Something went wrong.",
-                            Toast.LENGTH_LONG).show();
-                    Log.e(TAG, "AUTHENTICATION FAILURE!!!!");
+                    mAuth.createUserWithEmailAndPassword(email, password);
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    String uid;
+                    String uEmail;
+
+
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    uid = user.getUid();
+                    uEmail = user.getEmail().replace(".", "*%*");
+                    User userInfo = new User(firstName, lastName, apartment);
+                    String base = "Users/" + uEmail;
+                    DatabaseReference myRef = database.getReference(base);
+                    myRef.setValue(userInfo);
+                    //myRef.push().setValue(userInfo);
+
+                    if (user != null) {
+                        //User is signed in
+                        startActivity(intent);
+                        Log.i(TAG, "AUTHENTICATION SUCCESS!!!!");
+                    } else {
+                        Toast.makeText(getApplication(), "Something went wrong.",
+                                Toast.LENGTH_LONG).show();
+                        Log.e(TAG, "AUTHENTICATION FAILURE!!!!");
+                    }
                 }
-
-
-            } catch (Exception e)
+                catch (Exception e)
                 {
                     Toast.makeText(getApplication(), "One or more of the required inputs have been left blank.",
                             Toast.LENGTH_LONG).show();

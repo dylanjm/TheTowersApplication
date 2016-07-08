@@ -40,8 +40,10 @@ public class ComposeMessageActivity extends AppCompatActivity {
                     String subject = topicString.getText().toString();
                     String body = messageString.getText().toString();
                     String recipient = recipientString.getText().toString();
+                    recipient = recipient.replace(".", "*%*");
                     recipient = "Users/" + recipient + "/messages";
                     DatabaseReference myRef = database.getReference(recipient);
+
                     System.out.println(subject + body);
                     Message chat = new Message(subject, body, username, recipient);
                     // Create a new, auto-generated child of that chat location, and save our chat data there
