@@ -37,6 +37,8 @@
         android:layout_below="@+id/textView3"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:backgroundTint="#ff0000" />
+        android:textColor="@android:color/black"/>
+
+
 
 </RelativeLayout>

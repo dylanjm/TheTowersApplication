@@ -12,6 +12,11 @@ public class Message {
     private String recipient;
     private String sender;
 
+    @Override
+    public String toString() {
+        return "\n" + this.subject + "\n\nFrom: " + this.sender + "\n";
+    }
+
     /**
      * Public Constructor for a message object
      * @author Sam Ciavardini
