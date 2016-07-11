@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InboxActivity extends AppCompatActivity {
-    Button sampleMessage;
     TextView textView;
     ListView listView;
     @Override
@@ -39,7 +38,6 @@ public class InboxActivity extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.textView9);
         listView = (ListView) findViewById(R.id.listView);
 
-
         mDatabase.child("Users").child(email).child("messages").addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
@@ -51,7 +49,7 @@ public class InboxActivity extends AppCompatActivity {
 
                         for (DataSnapshot child : dataSnapshot.getChildren()) {
                             message = child.getValue(Message.class);
-                            messages.add(message);
+                            messages.add(0, message);
                         }
 
                         listAdapter = new ArrayAdapter<>(context, R.layout.customlayout, messages);
@@ -60,7 +58,7 @@ public class InboxActivity extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-                        //Log.w(TAG4, "getUser:onCancelled", databaseError.toException());
+                        System.out.println("getUser:onCancelled");
                     }
                 });
 
@@ -78,12 +76,5 @@ public class InboxActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        //sampleMessage = (Button) findViewById(R.id.button10);
-//        sampleMessage.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View view) {
-//                Intent intent = new Intent("android.intent.action.VIEWMESSAGE");
-//                startActivity(intent);
-//            }
-//        });
     }
 }
