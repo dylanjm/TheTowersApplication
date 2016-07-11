@@ -24,7 +24,7 @@ public class SignInActivity extends AppCompatActivity {
     EditText usernameTxt;
     EditText passwordTxt;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    final Intent intent = new Intent("android.intent.action.MAIN");
+    final Intent intent = new Intent("android.intent.action.MENU");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,8 +87,8 @@ public class SignInActivity extends AppCompatActivity {
         createProfile = (Button) findViewById(R.id.button2);
         createProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent intent = new Intent("android.intent.action.CREATEPROFILE");
-                startActivity(intent);
+                Intent intent2 = new Intent("android.intent.action.CREATEPROFILE");
+                startActivity(intent2);
             }
         });
     }
