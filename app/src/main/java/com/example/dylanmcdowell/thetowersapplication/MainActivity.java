@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -14,11 +16,12 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private static final String TAG = MainActivity.class.getSimpleName();
-    Button submitRequest;
-    Button signOut;
-    Button inbox;
-    Button composeMessage;
     Button viewRequests;
+    ImageButton submitRequest1;
+    ImageButton signOut1;
+    ImageButton inbox1;
+    ImageButton composeMessage1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,24 +43,24 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        submitRequest = (Button) findViewById(R.id.button3);
-        submitRequest.setOnClickListener(new View.OnClickListener() {
+        submitRequest1 = (ImageButton) findViewById(R.id.imageButton);
+        submitRequest1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent("android.intent.action.SUBMITREQUEST");
                 startActivity(intent);
             }
         });
 
-        inbox = (Button) findViewById(R.id.button4);
-        inbox.setOnClickListener(new View.OnClickListener() {
+        inbox1 = (ImageButton) findViewById(R.id.imageButton3);
+        inbox1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent("android.intent.action.INBOX");
                 startActivity(intent);
             }
         });
 
-        composeMessage = (Button) findViewById(R.id.button7);
-        composeMessage.setOnClickListener(new View.OnClickListener() {
+        composeMessage1 = (ImageButton) findViewById(R.id.imageButton2);
+        composeMessage1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent("android.intent.action.COMPOSEMESSAGE");
                 startActivity(intent);
@@ -72,8 +75,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        signOut = (Button) findViewById(R.id.button6);
-        signOut.setOnClickListener(new View.OnClickListener() {
+        signOut1 = (ImageButton) findViewById(R.id.imageButton4);
+        signOut1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
                 finish();
