@@ -9,61 +9,117 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.dylanmcdowell.thetowersapplication.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <GridLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="THE TOWERS!"
-        android:id="@+id/textView7" />
+        android:id="@+id/gridLayout"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Submit a Work Order"
-        android:id="@+id/button3"
-        android:layout_below="@+id/textView7"
-        android:layout_alignLeft="@+id/button5"
-        android:layout_alignStart="@+id/button5"
-        android:layout_alignRight="@+id/button5"
-        android:layout_alignEnd="@+id/button5" />
+        <Button
+            android:layout_width="180dp"
+            android:layout_height="82dp"
+            android:text="Submit a Work Order"
+            android:id="@+id/button3"
+            android:layout_above="@+id/button4"
+            android:layout_toRightOf="@+id/textView7"
+            android:layout_toEndOf="@+id/textView7"
+            android:layout_row="0"
+            android:layout_column="0" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="View Inbox"
-        android:id="@+id/button4"
-        android:layout_below="@+id/button3"
-        android:layout_alignRight="@+id/button3"
-        android:layout_alignEnd="@+id/button3"
-        android:layout_alignLeft="@+id/button3"
-        android:layout_alignStart="@+id/button3" />
+        <Button
+            android:layout_width="180dp"
+            android:layout_height="82dp"
+            android:text="Compose Message"
+            android:id="@+id/button7"
+            android:layout_below="@+id/button5"
+            android:layout_alignLeft="@+id/button5"
+            android:layout_alignStart="@+id/button5"
+            android:layout_alignRight="@+id/button5"
+            android:layout_alignEnd="@+id/button5"
+            android:layout_column="1"
+            android:layout_row="0" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/button5"
-        android:layout_below="@+id/button4"
-        android:layout_centerHorizontal="true"
-        android:text="View Maintenance Requests" />
+        <Button
+            android:layout_width="180dp"
+            android:layout_height="82dp"
+            android:text="View Inbox"
+            android:id="@+id/button4"
+            android:layout_centerVertical="true"
+            android:layout_alignLeft="@+id/button7"
+            android:layout_alignStart="@+id/button7"
+            android:layout_column="0"
+            android:layout_row="1" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sign Out"
-        android:id="@+id/button6"
-        android:layout_below="@+id/button7"
-        android:layout_alignLeft="@+id/button4"
-        android:layout_alignStart="@+id/button4"
-        android:layout_alignRight="@+id/button7"
-        android:layout_alignEnd="@+id/button7" />
+        <Button
+            android:layout_width="180dp"
+            android:layout_height="82dp"
+            android:text="Sign Out"
+            android:id="@+id/button6"
+            android:layout_column="1"
+            android:layout_row="1"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/gridLayout"
+            android:layout_alignEnd="@+id/gridLayout" />
 
-    <Button
+        <Button
+            android:layout_width="180dp"
+            android:layout_height="82dp"
+            android:id="@+id/button5"
+            android:layout_below="@+id/button4"
+            android:layout_centerHorizontal="true"
+            android:text="View Work Orders"
+            android:layout_column="0"
+            android:layout_row="2" />
+
+        <Button
+            android:layout_width="180dp"
+            android:layout_height="82dp"
+            android:text="Make Announcement"
+            android:id="@+id/button10"
+            android:layout_row="2"
+            android:layout_column="1" />
+
+        <ImageButton
+            android:layout_width="128dp"
+            android:layout_height="126dp"
+            android:id="@+id/imageButton"
+            android:layout_below="@+id/gridLayout"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_column="0"
+            android:layout_row="3"
+            android:src="@mipmap/service_icon"
+            android:scaleType="fitCenter" />
+
+        <ImageButton
+            android:layout_width="122dp"
+            android:layout_height="121dp"
+            android:id="@+id/imageButton2"
+            android:layout_row="3"
+            android:layout_column="1"
+            android:src="@mipmap/compose_1"
+            android:scaleType="fitCenter" />
+
+        <ImageButton
+            android:layout_width="87dp"
+            android:layout_height="70dp"
+            android:id="@+id/imageButton3"
+            android:layout_below="@+id/gridLayout"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_column="0"
+            android:layout_row="4"
+            android:scaleType="fitCenter" />
+    </GridLayout>
+
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Compose Message"
-        android:id="@+id/button7"
-        android:layout_below="@+id/button5"
-        android:layout_alignLeft="@+id/button5"
-        android:layout_alignStart="@+id/button5"
-        android:layout_alignRight="@+id/button5"
-        android:layout_alignEnd="@+id/button5" />
+        android:id="@+id/imageView"
+        android:src="@mipmap/TowersLogo"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
