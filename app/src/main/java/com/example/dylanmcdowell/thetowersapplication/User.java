@@ -6,52 +6,37 @@ package com.example.dylanmcdowell.thetowersapplication;
  */
 public class User {
 
-    User(String first, String last, String apt,
-         Boolean isMaint, Boolean isMan, Boolean isTen, Boolean islog) {
+    public User(String first, String last, String apt,
+         Boolean isStaf) {
         firstName = first;
         lastName = last;
         aptNumber = apt;
-        isMaintenance = isMaint;
-        isManager = isMan;
-        isTenant = isTen;
-        logged = islog;
+        isStaff = isStaf;
     }
 
-    User(String first, String last, String apt){
+    public User(String first, String last, String apt){
         firstName = first;
         lastName = last;
         aptNumber = apt;
+    }
+
+
+    private User() {
     }
 
 
     String firstName;
     String lastName;
     String aptNumber;
-    Boolean isManager;
-    Boolean isMaintenance;
-    Boolean isTenant;
+    Boolean isStaff;
 
-    ////////////////////////  Maybe?  //////////////////////////
-    // Boolean determining  whether one is logged in or not.?
-    Boolean logged;
-    // Stack messages
-    // Stack requests
-    ////////////////////////////////////////////////////////////
+
 
     // accepts a MaintenanceRequest object as a parameter and sends it along.
     void submitRequest(Boolean Maint){
     // Add request to Maintenance users.
     }
 
-    // Changes the user's status to logged in.
-    void login() {
-        logged = true;
-    }
-
-    // Changes user status to logged out
-    void signOut() {
-        logged = false;
-    }
 
     Message sendMessage(Message message) {
         // add message to the message stack.
