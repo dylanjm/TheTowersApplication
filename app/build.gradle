@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 
 dependencies {
     compile 'com.google.android.gms:play-services-appindexing:9.0.2'
+    //compile 'com.google.android.gms:play-services:9.2.0'
 }
 android {
     compileSdkVersion 23
@@ -34,6 +35,7 @@ dependencies {
     compile 'com.google.firebase:firebase-auth:9.0.2'
     compile 'com.google.firebase:firebase-messaging:9.0.2'
     compile 'com.google.firebase:firebase-database:9.0.2'
+
 
 }
 apply plugin: 'com.google.gms.google-services'

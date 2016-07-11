@@ -25,7 +25,8 @@
         <!--</service>-->
 
         //Main Activity - Main Page
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,7 +35,8 @@
         </activity>
 
         //Sign In Activity - LAUNCHER ACTIVITY
-        <activity android:name=".SignInActivity">
+        <activity android:name=".SignInActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
