@@ -24,7 +24,7 @@ import java.util.List;
 public class PendingRequestsActivity extends AppCompatActivity {
     TextView textView;
     ListView listView;
-
+    ArrayAdapter<Request> listAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,13 +43,14 @@ public class PendingRequestsActivity extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         // Get user value
                         Context context = getApplicationContext();
-                        ArrayAdapter<Request> listAdapter;
+
                         Request request;
                         int eCount = 0;
 
                         for (DataSnapshot child : dataSnapshot.getChildren()) {
                             request = child.getValue(Request.class);
                             request.setKey(child.getKey());
+                            System.out.println(request.getAptNumber());
                             if(request.getIsEmergency()) {
                                 requests.add(0, request);
                                 eCount++;
@@ -68,6 +69,8 @@ public class PendingRequestsActivity extends AppCompatActivity {
                     }
                 });
 
+
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -78,7 +81,8 @@ public class PendingRequestsActivity extends AppCompatActivity {
                 bundle.putString("body", bundleRequest.getBody());
                 bundle.putString("sender", bundleRequest.getSender());
                 bundle.putString("timeStamp", bundleRequest.getTimeStamp());
-                bundle.putString("roomNum", bundleRequest.getRoomNum());
+                bundle.putString("roomNum", bundleRequest.getAptNumber());
+                bundle.putBoolean("isEmergency", bundleRequest.getIsEmergency());
                 bundle.putString("key", bundleRequest.getKey());
                 Intent intent = new Intent("android.intent.action.MAINTENANCEREQUEST");
                 intent.putExtras(bundle);

@@ -24,6 +24,7 @@ import java.util.List;
 public class InboxActivity extends AppCompatActivity {
     TextView textView;
     ListView listView;
+    ArrayAdapter<Message> listAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +44,7 @@ public class InboxActivity extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         // Get user value
                         Context context = getApplicationContext();
-                        ArrayAdapter<Message> listAdapter;
+
                         Message message;
 
                         for (DataSnapshot child : dataSnapshot.getChildren()) {
@@ -71,6 +72,7 @@ public class InboxActivity extends AppCompatActivity {
                         for (DataSnapshot child : dataSnapshot.getChildren()) {
                             message = child.getValue(Message.class);
                             messages.add(0, message);
+                            listView.setAdapter(listAdapter);
                         }
                     }
 

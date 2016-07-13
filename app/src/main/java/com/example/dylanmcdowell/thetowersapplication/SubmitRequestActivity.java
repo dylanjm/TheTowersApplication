@@ -26,6 +26,9 @@ public class SubmitRequestActivity extends AppCompatActivity {
     Button submit;
     Button cancel;
     CheckBox checkbox;
+    User theUser;
+    String senderName;
+    String apt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +41,24 @@ public class SubmitRequestActivity extends AppCompatActivity {
         checkbox = (CheckBox) findViewById(R.id.checkbox);
         FirebaseAuth fauth = FirebaseAuth.getInstance();
         FirebaseUser user = fauth.getCurrentUser();
-        final String username =  user.getEmail();
+        final String username =  user.getEmail().replace(".", "*%*");
+
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        mDatabase.child("Users").child(username).addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // Get user value
+                        theUser = dataSnapshot.getValue(User.class);
+                        senderName = theUser.getFirstName() + " " + theUser.getLastName();
+                        apt = theUser.getAptNumber();
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        //Log.w(TAG, "getUser:onCancelled", databaseError.toException());
+                    }
+                });
 
         //submit button
         submit = (Button) findViewById(R.id.button);
@@ -53,7 +73,7 @@ public class SubmitRequestActivity extends AppCompatActivity {
 
 
                 System.out.println(subject + body);
-                Request request = new Request(subject, body, username, emergency, "420", time);
+                Request request = new Request(subject, body, senderName, emergency, apt, time);
                 // Create a new, auto-generated child of that request location, and save our chat data there
                 myRef.push().setValue(request);
                 try {

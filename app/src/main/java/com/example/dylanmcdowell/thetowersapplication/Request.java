@@ -12,12 +12,15 @@ public class Request {
     @Override
     public String toString() {
         return "\n"
-                + this.timeStamp.replace("_", " ")
+                + this.subject + this.getEmergencyMessage()
                 + "\n"
-                + "Subject: " + this.subject
+                + this.aptNumber
+                + "\n"
+                + this.timeStamp.replace("_", " ")
                 + "\n"
                 + "From: " + this.sender
                 + "\n";
+
     }
 
     public Request(String theSubject, String theBody, String theSender, Boolean emergency, String aptNumber, String time) {
@@ -39,8 +42,14 @@ public class Request {
     public String getSender()       { return sender;      }
     public Boolean getIsEmergency() { return isEmergency; }
     public String getTimeStamp()    { return timeStamp;   }
-    public String getRoomNum()      { return aptNumber;   }
+    public String getAptNumber()      { return aptNumber;   }
     public String getKey()          { return key;         }
+    public String getEmergencyMessage(){
+        if (isEmergency)
+            return " -Emergency!!!";
+        else
+            return "";
+    }
 
     //setter
     public void setKey(String theKey) {key = theKey;      }
