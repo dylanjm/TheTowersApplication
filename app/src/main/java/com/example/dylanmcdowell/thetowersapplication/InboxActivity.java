@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -61,6 +60,26 @@ public class InboxActivity extends AppCompatActivity {
                         System.out.println("getUser:onCancelled");
                     }
                 });
+
+        mDatabase.child("Public").child("messages").addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        //Context context = getApplicationContext();
+                        Message message;
+
+                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                            message = child.getValue(Message.class);
+                            messages.add(0, message);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        System.out.println("getUser:onCancelled");
+                    }
+                }
+        );
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -1,8 +1,5 @@
 package com.example.dylanmcdowell.thetowersapplication;
 
-import android.support.annotation.NonNull;
-import android.util.Log;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -21,7 +18,8 @@ public class User {
     private Boolean isStaff;
     private Boolean isLogged;
 
-    //User(){setCurrentUser();}
+    //User(){setCurrentUser()
+    private User(){}
 
     User(String email, String first,
          String last, String aptNum,
