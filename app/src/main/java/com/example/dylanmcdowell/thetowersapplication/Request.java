@@ -7,6 +7,7 @@ public class Request {
     private Boolean isEmergency;
     private String timeStamp;
     private String aptNumber;
+    private String key;
 
     @Override
     public String toString() {
@@ -32,12 +33,17 @@ public class Request {
     private Request() {
     }
 
+    //getters
     public String getSubject()      { return subject;     }
     public String getBody()         { return body;        }
     public String getSender()       { return sender;      }
     public Boolean getIsEmergency() { return isEmergency; }
     public String getTimeStamp()    { return timeStamp;   }
     public String getRoomNum()      { return aptNumber;   }
+    public String getKey()          { return key;         }
+
+    //setter
+    public void setKey(String theKey) {key = theKey;      }
 }
 
 

@@ -49,6 +49,7 @@ public class PendingRequestsActivity extends AppCompatActivity {
 
                         for (DataSnapshot child : dataSnapshot.getChildren()) {
                             request = child.getValue(Request.class);
+                            request.setKey(child.getKey());
                             if(request.getIsEmergency()) {
                                 requests.add(0, request);
                                 eCount++;
@@ -71,8 +72,16 @@ public class PendingRequestsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Bundle bundle = new Bundle();
-                //bundle.putString("subject", view.;
-                Intent intent = new Intent("android.intent.action.VIEWMESSAGE");
+                Request bundleRequest = requests.get(position);
+
+                bundle.putString("subject", bundleRequest.getSubject());
+                bundle.putString("body", bundleRequest.getBody());
+                bundle.putString("sender", bundleRequest.getSender());
+                bundle.putString("timeStamp", bundleRequest.getTimeStamp());
+                bundle.putString("roomNum", bundleRequest.getRoomNum());
+                bundle.putString("key", bundleRequest.getKey());
+                Intent intent = new Intent("android.intent.action.MAINTENANCEREQUEST");
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
