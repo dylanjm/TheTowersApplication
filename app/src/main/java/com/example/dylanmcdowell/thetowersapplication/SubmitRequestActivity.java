@@ -9,8 +9,14 @@ import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 
 public class SubmitRequestActivity extends AppCompatActivity {
@@ -38,14 +44,17 @@ public class SubmitRequestActivity extends AppCompatActivity {
         submit = (Button) findViewById(R.id.button);
         submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                DatabaseReference myRef = database.getReference("Requests");
+
                 String subject = topicString.getText().toString();
                 String body = messageString.getText().toString();
                 Boolean emergency = checkbox.isChecked();
+                String time = new SimpleDateFormat("MM/dd/yyyy_hh:mm a").format(Calendar.getInstance().getTime());
 
-                DatabaseReference myRef = database.getReference("Requests");
+
                 System.out.println(subject + body);
-                Request request = new Request(subject, body, username, emergency);
-                // Create a new, auto-generated child of that chat location, and save our chat data there
+                Request request = new Request(subject, body, username, emergency, "420", time);
+                // Create a new, auto-generated child of that request location, and save our chat data there
                 myRef.push().setValue(request);
                 try {
                     Thread.sleep(5000);

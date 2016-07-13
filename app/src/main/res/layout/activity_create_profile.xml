@@ -9,77 +9,108 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.dylanmcdowell.thetowersapplication.CreateProfileActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="6 Input Fields, 6 Text Boxes, USERNAME, PASSWORD, CONFIRM PASSWORD, FIRST NAME, LAST NAME, EMPLOYEE?, APARTMENT NUMBER"
-        android:id="@+id/textView2"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="43dp" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
+        android:imeOptions="actionNext"
         android:ems="10"
         android:id="@+id/editText7"
-        android:layout_centerVertical="true"
+        android:ellipsize="start"
+        android:gravity="center_horizontal"
+        android:hint="E-mail"
+        android:layout_above="@+id/editText8"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:hint="E-mail" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
+        android:imeOptions="actionNext"
         android:ems="10"
         android:id="@+id/editText8"
+        android:ellipsize="start"
+        android:gravity="center_horizontal"
+        android:hint="Password"
+        android:layout_above="@+id/editText10"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:hint="Password"
-        android:layout_below="@+id/editText7" />
+        android:layout_alignRight="@+id/editText7"
+        android:layout_alignEnd="@+id/editText7" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:imeOptions="actionNext"
+        android:id="@+id/editText10"
+        android:ellipsize="start"
+        android:gravity="center_horizontal"
+        android:hint="First Name"
+        android:layout_above="@+id/editText11"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/editText8"
+        android:layout_alignEnd="@+id/editText8" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:imeOptions="actionNext"
+        android:id="@+id/editText11"
+        android:ellipsize="start"
+        android:gravity="center_horizontal"
+        android:hint="Last Name"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/editText10"
+        android:layout_alignEnd="@+id/editText10" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:imeOptions="actionNext"
+        android:id="@+id/editText12"
+        android:ellipsize="start"
+        android:gravity="center_horizontal"
+        android:hint="Apt. Number"
+        android:layout_below="@+id/editText11"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/editText11"
+        android:layout_alignEnd="@+id/editText11" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:imeOptions="actionDone"
+        android:ems="10"
+        android:id="@+id/editText13"
+        android:ellipsize="start"
+        android:gravity="center_horizontal"
+        android:hint="Admin ID"
+        android:layout_below="@+id/editText12"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/editText12"
+        android:layout_alignEnd="@+id/editText12" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create Profile"
         android:id="@+id/button13"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText10"
-        android:layout_below="@+id/editText8"
+        android:layout_below="@+id/editText13"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/editText8"
-        android:layout_alignEnd="@+id/editText8"
-        android:hint="First Name" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText11"
-        android:layout_below="@+id/editText10"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/editText10"
-        android:layout_alignEnd="@+id/editText10"
-        android:hint="Last Name" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText12"
-        android:layout_below="@+id/editText11"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/editText11"
-        android:layout_alignEnd="@+id/editText11"
-        android:hint="Apt. Number" />
+        android:layout_alignRight="@+id/editText13"
+        android:layout_alignEnd="@+id/editText13" />
 
 </RelativeLayout>
