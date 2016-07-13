@@ -3,6 +3,7 @@ package com.example.dylanmcdowell.thetowersapplication;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +32,8 @@ public class CreateProfileActivity extends AppCompatActivity {
     //Logistic Variables
     private static final String TAG = "theTag";
     private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    final Intent intent = new Intent("android.intent.action.MENU");
     //Element Variables
     EditText emailString;
     EditText passwordString;
@@ -48,7 +51,7 @@ public class CreateProfileActivity extends AppCompatActivity {
     String adminID;
     String databaseEmail;
     boolean isStaff;
-    boolean isLogged;
+    boolean isLogged = false;
 
     /*************************************************
      * SHOW POP UP - prompts Staff for ID
@@ -59,7 +62,8 @@ public class CreateProfileActivity extends AppCompatActivity {
         helpBuilder.setMessage("Only required for The Towers Staff");
         helpBuilder.setPositiveButton("Ok",
                 new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {}
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
                 });
         AlertDialog helpDialog = helpBuilder.create();
         helpDialog.show();
@@ -108,66 +112,45 @@ public class CreateProfileActivity extends AppCompatActivity {
             apartmentField.setError(null);
         }
         adminID = adminIDField.getText().toString();
-        if(TextUtils.isEmpty(adminID)){
+        if (TextUtils.isEmpty(adminID)) {
             isStaff = false;
-        }
-        else if(!adminID.equals("thetowers2016")){
+        } else if (!adminID.equals("thetowers2016")) {
             adminIDField.setError("Not Staff.");
             isStaff = false;
         }
-
         return valid;
     }
 
     /*************************************************
      * HANDLE LOGIN - creates user in FireBase
      *************************************************/
-    boolean handleLogin(){
-        //Atomic Boolean so we can change it wherever
-        final AtomicBoolean authState = new AtomicBoolean(false);
-        Calendar currentTime = Calendar.getInstance();
-        Calendar timeOut = (Calendar)currentTime.clone();
-        timeOut.add(Calendar.SECOND, 10);
-
-        System.out.println("Current Time: " + currentTime);
-        System.out.println("Time Out: " + timeOut);
-
+    void handleLogin() {
         //Check our form
         if (!validateForm()) {
             Toast.makeText(getApplication(), "All Fields Required",
                     Toast.LENGTH_SHORT).show();
-            return authState.get();
+            return;
         }
-        //Create User Profile
+        //Sign in the user
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
-                        authState.set(true);
+                        Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
                         if (!task.isSuccessful()) {
+                            Log.w(TAG, "signInWithEmail", task.getException());
                             Toast.makeText(getApplication(), "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-        while(!authState.get() && currentTime.before(timeOut.getTime())){
-            System.out.println("INSIDE WHILE LOOP!");
-            System.out.println("Before current time: " + currentTime.before(timeOut));
-            try{
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        System.out.println("OUTSIDE WHILE LOOP " + "AUTH STATE: " + authState.get());
-        return authState.get();
     }
 
     /*************************************************
      * HANDLE DATA STORAGE - store user into FireBase
      *************************************************/
-    void handleDataStorage(FirebaseUser user){
+    void handleDataStorage() {
+        FirebaseUser user = mAuth.getCurrentUser();
         isLogged = true;
         databaseEmail = user.getEmail().replace(".", "*%*");
         User userInfo = new User(email, firstName, lastName, apartment, isStaff, isLogged);
@@ -185,12 +168,27 @@ public class CreateProfileActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_create_profile);
 
+        //Checking authState from Firebase
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth mAuth) {
+                FirebaseUser user = mAuth.getCurrentUser();
+                if (user != null) {
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    handleDataStorage();
+                    startActivity(intent);
+                } else {
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                }
+            }
+        };
+
         //Pop up for when adminID is activated
         adminIDField = (EditText) findViewById(R.id.editText13);
         adminIDField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus)
+                if (hasFocus)
                     showPopUp();
                 else
                     System.out.println("Admin ID entered...");
@@ -201,22 +199,31 @@ public class CreateProfileActivity extends AppCompatActivity {
         createProfile = (Button) findViewById(R.id.button13);
         createProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                emailString    = (EditText) findViewById(R.id.editText7);
+                Calendar currentTime = Calendar.getInstance();
+                Calendar timeOut = (Calendar)currentTime.clone();
+                timeOut.add(Calendar.SECOND, 10);
+                emailString = (EditText) findViewById(R.id.editText7);
                 passwordString = (EditText) findViewById(R.id.editText8);
                 firstNameField = (EditText) findViewById(R.id.editText10);
-                lastNameField  = (EditText) findViewById(R.id.editText11);
+                lastNameField = (EditText) findViewById(R.id.editText11);
                 apartmentField = (EditText) findViewById(R.id.editText12);
-                Intent intent  = new Intent("android.intent.action.MAIN");
-
-                if (handleLogin()) {
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    if(user!=null){
-                        handleDataStorage(user);
-                        startActivity(intent);
-                    }
-
-                }
+                //Start Login
+                handleLogin();
             }
         });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
     }
 }
