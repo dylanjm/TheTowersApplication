@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Make Public Announcement Button - STAFF ONLY
         makeAnnouncement = (Button) findViewById(R.id.button10);
-        viewRequests.setOnClickListener(new View.OnClickListener() {
+        makeAnnouncement.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent publicMessage = new Intent("android.intent.action.COMPOSEMESSAGE");
                 startActivity(publicMessage);
