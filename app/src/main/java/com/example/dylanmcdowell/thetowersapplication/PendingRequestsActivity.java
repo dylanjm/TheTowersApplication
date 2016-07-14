@@ -10,8 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,18 +23,16 @@ public class PendingRequestsActivity extends AppCompatActivity {
     TextView textView;
     ListView listView;
     ArrayAdapter<Request> listAdapter;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pending_requests);
+    protected void onResume(){
+        super.onResume();
+        generateList();
+    }
 
-        FirebaseAuth fauth = FirebaseAuth.getInstance();
-        FirebaseUser user = fauth.getCurrentUser();
+    void generateList(){
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        textView = (TextView) findViewById(R.id.textView9);
-        listView = (ListView) findViewById(R.id.listView);
         final List<Request> requests = new ArrayList<>();
-
         mDatabase.child("Requests").addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
@@ -60,7 +56,7 @@ public class PendingRequestsActivity extends AppCompatActivity {
                         }
 
                         listAdapter = new ArrayAdapter<>(context, R.layout.customlayout, requests);
-                        //listAdapter = new CustomListAdapter(context, R.layout.activity_pending_requests, requests);
+                        listAdapter.notifyDataSetChanged();
                         listView.setAdapter(listAdapter);
                     }
 
@@ -90,6 +86,17 @@ public class PendingRequestsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_pending_requests);
+
+
+        textView = (TextView) findViewById(R.id.textView9);
+        listView = (ListView) findViewById(R.id.listView);
+        generateList();
 
     }
 }
