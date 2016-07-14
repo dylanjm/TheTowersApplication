@@ -67,17 +67,8 @@ public class MainActivity extends AppCompatActivity {
         submitRequest1 = (ImageButton) findViewById(R.id.imageButton);
         submitRequest1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent intent = new Intent("android.intent.action.SUBMITREQUEST");
-                startActivity(intent);
-            }
-        });
-
-        //Message Inbox Button
-        inbox1 = (ImageButton) findViewById(R.id.imageButton3);
-        inbox1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Intent intent = new Intent("android.intent.action.INBOX");
-                startActivity(intent);
+                Intent submitRequest = new Intent("android.intent.action.SUBMITREQUEST");
+                startActivity(submitRequest);
             }
         });
 
@@ -85,26 +76,17 @@ public class MainActivity extends AppCompatActivity {
         composeMessage1 = (ImageButton) findViewById(R.id.imageButton2);
         composeMessage1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent intent = new Intent("android.intent.action.COMPOSEMESSAGE");
-                startActivity(intent);
+                Intent composeMessage = new Intent("android.intent.action.COMPOSEMESSAGE");
+                startActivity(composeMessage);
             }
         });
 
-        //Maintenance Request ListView Button - STAFF ONLY
-        viewRequests = (Button) findViewById(R.id.button5);
-        viewRequests.setOnClickListener(new View.OnClickListener() {
+        //Message Inbox Button
+        inbox1 = (ImageButton) findViewById(R.id.imageButton3);
+        inbox1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent intent = new Intent("android.intent.action.PENDINGREQUESTS");
-                startActivity(intent);
-            }
-        });
-
-        //Make Public Announcement Button - STAFF ONLY
-        makeAnnouncement = (Button) findViewById(R.id.button10);
-        viewRequests.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Intent intent = new Intent("android.intent.action.COMPOSEMESSAGE");
-                startActivity(intent);
+                Intent inbox = new Intent("android.intent.action.INBOX");
+                startActivity(inbox);
             }
         });
 
@@ -114,13 +96,29 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 currentUser.signOut();
                 FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent("android.intent.action.MAIN");
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-                finish();
             }
         });
 
+        //Maintenance Request ListView Button - STAFF ONLY
+        viewRequests = (Button) findViewById(R.id.button5);
+        viewRequests.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent pendingRequests = new Intent("android.intent.action.PENDINGREQUESTS");
+                startActivity(pendingRequests);
+            }
+        });
+
+        //Make Public Announcement Button - STAFF ONLY
+        makeAnnouncement = (Button) findViewById(R.id.button10);
+        viewRequests.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent publicMessage = new Intent("android.intent.action.COMPOSEMESSAGE");
+                startActivity(publicMessage);
+            }
+        });
     }
 
     /**************************************************

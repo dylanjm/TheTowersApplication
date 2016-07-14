@@ -60,6 +60,7 @@ public class PendingRequestsActivity extends AppCompatActivity {
                         }
 
                         listAdapter = new ArrayAdapter<>(context, R.layout.customlayout, requests);
+                        //listAdapter = new CustomListAdapter(context, R.layout.activity_pending_requests, requests);
                         listView.setAdapter(listAdapter);
                     }
 

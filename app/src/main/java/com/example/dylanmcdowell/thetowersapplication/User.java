@@ -44,7 +44,6 @@ public class User {
     Boolean getIsLogged() { return isLogged;  }
     Boolean getIsStaff()  { return isStaff;   }
 
-
     // Setters
     void setEmail(String email)      { this.email = email;      }
     void setLastName(String last)    { this.lastName = last;    }
@@ -54,6 +53,11 @@ public class User {
     void setIsLogged(Boolean logged) { this.isLogged = logged;  }
 
     // Handle Login State
-    void login()   { setIsLogged(true);  }
-    void signOut() { setIsLogged(false); }
+    void signOut() {
+        setIsLogged(false);
+        String databaseEmail = this.getEmail().replace(".", "*%*");
+        String base = "Users/" + databaseEmail +"/isLogged";
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference(base);
+        myRef.setValue(getIsLogged());
+    }
 }
