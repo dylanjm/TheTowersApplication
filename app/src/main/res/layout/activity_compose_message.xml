@@ -14,12 +14,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/editText9"
         android:hint="Recipient"
+        android:layout_marginTop="61dp"
         android:layout_below="@+id/textView8"
-        android:layout_alignRight="@+id/button12"
-        android:layout_alignEnd="@+id/button12"
-        android:layout_marginTop="125dp"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/button12"
+        android:layout_alignEnd="@+id/button12" />
 
     <EditText
         android:layout_width="wrap_content"
