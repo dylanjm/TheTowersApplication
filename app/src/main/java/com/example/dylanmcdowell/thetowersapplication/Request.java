@@ -20,29 +20,29 @@ public class Request {
                 + "\n"
                 + "From: " + this.sender
                 + "\n";
-
     }
 
-    public Request(String theSubject, String theBody, String theSender, Boolean emergency, String aptNumber, String time) {
-        this.subject = theSubject;
-        this.body = theBody;
-        this.sender = theSender;
+    //Default Constructor
+    Request() {}
+
+    //Non-Default Constructor
+    public Request(String theSubject, String theBody, String theSender,
+                   Boolean emergency, String aptNumber, String time) {
+        this.subject     = theSubject;
+        this.body        = theBody;
+        this.sender      = theSender;
         this.isEmergency = emergency;
-        this.timeStamp = time;
-        this.aptNumber = aptNumber;
+        this.timeStamp   = time;
+        this.aptNumber   = aptNumber;
     }
 
-    @SuppressWarnings("unused")
-    private Request() {
-    }
-
-    //getters
+    //Getters
     public String getSubject()      { return subject;     }
     public String getBody()         { return body;        }
     public String getSender()       { return sender;      }
     public Boolean getIsEmergency() { return isEmergency; }
     public String getTimeStamp()    { return timeStamp;   }
-    public String getAptNumber()      { return aptNumber;   }
+    public String getAptNumber()    { return aptNumber;   }
     public String getKey()          { return key;         }
     public String getEmergencyMessage(){
         if (isEmergency)
@@ -51,8 +51,8 @@ public class Request {
             return "";
     }
 
-    //setter
-    public void setKey(String theKey) {key = theKey;      }
+    //Setters
+    public void setKey(String theKey) { key = theKey; }
 }
 
 

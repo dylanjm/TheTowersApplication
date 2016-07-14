@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,17 +16,79 @@ import com.google.firebase.auth.FirebaseUser;
 
 
 public class SignInActivity extends AppCompatActivity {
+    //Logistic Variables
     private static final String TAG2 = SignInActivity.class.getSimpleName();
+    private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth mAuth;
+    //Element Variables
     Button signIn;
     Button createProfile;
-    String username;
-    String password;
-    EditText usernameTxt;
-    EditText passwordTxt;
-    private FirebaseAuth.AuthStateListener mAuthListener;
+    String emailString;
+    String passwordString;
+    EditText emailText;
+    EditText passwordText;
+    //Intents
     final Intent intent = new Intent("android.intent.action.MENU");
+    final Intent intent2 = new Intent("android.intent.action.CREATEPROFILE");
 
+    /*************************************************
+     * VALIDATE FORM - checks for NULL strings
+     *************************************************/
+    private boolean validateForm() {
+        boolean valid = true;
+
+        emailString = emailText.getText().toString();
+        if (TextUtils.isEmpty(emailString)) {
+            emailText.setError("Required.");
+            valid = false;
+        } else {
+            emailText.setError(null);
+        }
+
+        passwordString = passwordText.getText().toString();
+        if (TextUtils.isEmpty(passwordString)) {
+            passwordText.setError("Required.");
+            valid = false;
+        } else {
+            passwordText.setError(null);
+        }
+
+        return valid;
+    }
+
+    /****************************************************
+     * INITIALIZE BUTTONS - confirms buttons and display
+     ****************************************************/
+    void initializeButtons(){
+        //Sign In Button
+        signIn = (Button) findViewById(R.id.button);
+        signIn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                emailText = (EditText) findViewById(R.id.editText);
+                passwordText = (EditText) findViewById(R.id.editText2);
+                if(!validateForm()){
+                    Toast.makeText(getApplication(), "All Fields Required",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                //Handle Sign In
+                mAuth.signInWithEmailAndPassword(emailString, passwordString);
+            }
+        });
+
+        //Create Profile Button
+        createProfile = (Button) findViewById(R.id.button2);
+        createProfile.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                // Start Create Profile Activity
+                startActivity(intent2);
+            }
+        });
+    }
+
+    /*************************************************
+     * ON CREATE - Activity runs from here
+     *************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,71 +100,32 @@ public class SignInActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    // User is signed in
                     Log.i(TAG2, "onAuthStateChanged:signed_in:" + user.getUid());
+                    //Start Main Activity
                     startActivity(intent);
                 } else {
-                    // User is signed out
                     Log.i(TAG2, "onAuthStateChanged:signed_out");
                 }
             }
         };
 
-        //Sign In Button
-        signIn = (Button) findViewById(R.id.button);
-        signIn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                    // Create a handler to handle the result of the authentication
-                    usernameTxt = (EditText) findViewById(R.id.editText);
-                    passwordTxt = (EditText) findViewById(R.id.editText2);
-                    try{
-                        username = usernameTxt.getText().toString();
-                        password = passwordTxt.getText().toString();
-                        mAuth.signInWithEmailAndPassword(username, password);
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        if (user != null) {
-                            //User is signed in
-                            startActivity(intent);
-                            Log.i(TAG2, "AUTHENTICATION SUCCESS!!!!");
-                        }
-                        else {
-                            // User is signed out
-                            Log.e(TAG2, "AUTHENTICATION FAILURE!!!!");
-                            Toast.makeText(getApplication().getApplicationContext(), "User does not exist.",
-                                Toast.LENGTH_LONG).show();
-                        }
-                    }
-                    catch (Exception e) {
-                        Toast.makeText(getApplication().getApplicationContext(), "Empty Fields!",
-                            Toast.LENGTH_LONG).show();
-                    }
-            }
-        });
-
-        //Create Profile Button
-        createProfile = (Button) findViewById(R.id.button2);
-        createProfile.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Intent intent2 = new Intent("android.intent.action.CREATEPROFILE");
-                startActivity(intent2);
-            }
-        });
+        //Create and Display all the buttons
+        initializeButtons();
     }
-        @Override
-        public void onStart() {
-            super.onStart();
-            mAuth.addAuthStateListener(mAuthListener);
+
+    /*************************************************
+     * HANDLE LISTENERS - handles firebase listeners
+     *************************************************/
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
         }
-        @Override
-        public void onStop() {
-            super.onStop();
-            if (mAuthListener != null) {
-                mAuth.removeAuthStateListener(mAuthListener);
-            }
-        }
+    }
 }

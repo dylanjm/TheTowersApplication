@@ -199,13 +199,10 @@ public class CreateProfileActivity extends AppCompatActivity {
         createProfile = (Button) findViewById(R.id.button13);
         createProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Calendar currentTime = Calendar.getInstance();
-                Calendar timeOut = (Calendar)currentTime.clone();
-                timeOut.add(Calendar.SECOND, 10);
-                emailString = (EditText) findViewById(R.id.editText7);
+                emailString    = (EditText) findViewById(R.id.editText7);
                 passwordString = (EditText) findViewById(R.id.editText8);
                 firstNameField = (EditText) findViewById(R.id.editText10);
-                lastNameField = (EditText) findViewById(R.id.editText11);
+                lastNameField  = (EditText) findViewById(R.id.editText11);
                 apartmentField = (EditText) findViewById(R.id.editText12);
                 //Start Login
                 handleLogin();

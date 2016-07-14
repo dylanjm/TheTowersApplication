@@ -1,5 +1,8 @@
 package com.example.dylanmcdowell.thetowersapplication;
 
+import android.view.View;
+import android.widget.Button;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -9,8 +12,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class User {
+    //Logistic Variables
     private static final String TAG = "theTag";
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    //Member Variables
     private String email;
     private String firstName;
     private String lastName;
@@ -18,8 +23,7 @@ public class User {
     private Boolean isStaff;
     private Boolean isLogged;
 
-    //User(){setCurrentUser()
-    private User(){}
+    User(){}
 
     User(String email, String first,
          String last, String aptNum,
@@ -52,27 +56,4 @@ public class User {
     // Handle Login State
     void login()   { setIsLogged(true);  }
     void signOut() { setIsLogged(false); }
-
-    // Handle Current User
-    void setCurrentUser() {
-        FirebaseUser user = mAuth.getCurrentUser();
-        if(user!=null) {
-            final String username = user.getEmail().replace(".", "*%*");
-            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference();
-            userRef.child("Users").child(username).addValueEventListener(
-                    new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            User currentUser = dataSnapshot.getValue(User.class);
-                            System.out.println(currentUser);
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-                            System.out.println("Read Failed! " + databaseError.toException());
-                        }
-                    });
-        }
-    }
-
 }
