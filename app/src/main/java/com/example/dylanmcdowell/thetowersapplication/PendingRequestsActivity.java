@@ -37,7 +37,6 @@ public class PendingRequestsActivity extends AppCompatActivity {
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        // Get user value
                         Context context = getApplicationContext();
 
                         Request request;
@@ -48,11 +47,12 @@ public class PendingRequestsActivity extends AppCompatActivity {
                             request.setKey(child.getKey());
                             System.out.println(request.getAptNumber());
                             if(request.getIsEmergency()) {
-                                requests.add(0, request);
+                                requests.add(eCount, request);
+
                                 eCount++;
                             }
                             else
-                                requests.add(eCount, request);
+                                requests.add(request);
                         }
 
                         listAdapter = new ArrayAdapter<>(context, R.layout.customlayout, requests);
@@ -97,6 +97,5 @@ public class PendingRequestsActivity extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.textView9);
         listView = (ListView) findViewById(R.id.listView);
         generateList();
-
     }
 }
