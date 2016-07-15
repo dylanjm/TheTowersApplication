@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     //Element Variables
     User currentUser;
     Button viewRequests;
-    Button makeAnnouncement;
     ImageButton submitRequest1;
     ImageButton signOut1;
     ImageButton inbox1;
@@ -46,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
                             currentUser = dataSnapshot.getValue(User.class);
                             if(currentUser.getIsStaff()){
                                 viewRequests.setVisibility(View.VISIBLE);
-                                makeAnnouncement.setVisibility(View.VISIBLE);
                             }
                         }
                         @Override
@@ -111,14 +109,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //Make Public Announcement Button - STAFF ONLY
-        makeAnnouncement = (Button) findViewById(R.id.button10);
-        makeAnnouncement.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Intent publicMessage = new Intent("android.intent.action.COMPOSEMESSAGE");
-                startActivity(publicMessage);
-            }
-        });
     }
 
     /**************************************************
