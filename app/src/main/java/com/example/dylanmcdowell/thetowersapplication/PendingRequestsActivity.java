@@ -23,6 +23,7 @@ public class PendingRequestsActivity extends AppCompatActivity {
     ListView listView;
     Context context;
     final List<Request> requests = new ArrayList<>();
+    Integer deleteItem = null;
 
     /**************************************************
      * ON RESUME
@@ -30,6 +31,9 @@ public class PendingRequestsActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
+        requests.clear();
+        generateList();
+        displayList();
     }
 
     /**************************************************
@@ -96,6 +100,13 @@ public class PendingRequestsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                return false;
+            }
+        });
     }
 
     /**************************************************
@@ -109,7 +120,6 @@ public class PendingRequestsActivity extends AppCompatActivity {
         getWindow().getDecorView().setBackgroundColor(res.getColor(R.color.darkTheme));
 
         listView = (ListView) findViewById(R.id.listView);
-        generateList();
         initializeButtons();
     }
 }

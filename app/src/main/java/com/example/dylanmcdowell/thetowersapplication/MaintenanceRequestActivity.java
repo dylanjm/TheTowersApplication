@@ -3,7 +3,6 @@ package com.example.dylanmcdowell.thetowersapplication;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
-import android.text.Spannable;
 import android.text.Spanned;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +20,7 @@ public class MaintenanceRequestActivity extends AppCompatActivity {
     TextView timeStamp;
     TextView roomNum;
     TextView isEmergency;
+    int delete;
     Bundle bundle;
 
     /**************************************************
@@ -38,6 +38,7 @@ public class MaintenanceRequestActivity extends AppCompatActivity {
         roomNum.setText(aptNumber);
         subject.setText(issue);
         sender.setText(from);
+        delete = bundle.getInt("delete");
 
         if (bundle.getBoolean("isEmergency"))
             isEmergency.setText("Emergency!!");
