@@ -23,7 +23,6 @@ public class PendingRequestsActivity extends AppCompatActivity {
     ListView listView;
     Context context;
     final List<Request> requests = new ArrayList<>();
-    Integer deleteItem = null;
 
     /**************************************************
      * ON RESUME

@@ -29,7 +29,7 @@ public class InboxActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inbox);
-
+        //getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.darkTheme));
         FirebaseAuth fauth = FirebaseAuth.getInstance();
         FirebaseUser user = fauth.getCurrentUser();
         final String email =  user.getEmail().replace(".", "*%*");

@@ -22,7 +22,8 @@
         android:text="Inbox"
         android:textStyle="bold"
         android:textSize="30dp"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textColor="#000000" />
 
     <ListView
         android:layout_width="wrap_content"
