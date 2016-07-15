@@ -17,7 +17,7 @@ public class Request {
                 + "\n"
                 + "<b>Issue: </b>" + this.subject
                 + "\n"
-                + "<b>Time: </b>" + this.timeStamp.replace("_0", " ").replace("_", " ");
+                + "<b>Date: </b>" + this.timeStamp.replace("_0", " ").replace("_", " ");
     }
 
     //Default Constructor
@@ -42,12 +42,6 @@ public class Request {
     public String getTimeStamp()    { return timeStamp;   }
     public String getAptNumber()    { return aptNumber;   }
     public String getKey()          { return key;         }
-    public String getEmergencyMessage(){
-        if (isEmergency)
-            return " -Emergency!!!";
-        else
-            return "";
-    }
 
     //Setters
     public void setKey(String theKey) { key = theKey; }

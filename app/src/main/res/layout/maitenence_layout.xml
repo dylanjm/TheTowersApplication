@@ -3,6 +3,8 @@
     android:padding="10dp"
     android:id="@+id/textView9"
     android:textColor="@android:color/black"
+    android:drawableStart="@drawable/emergency"
+    android:drawableLeft="@drawable/emergency"
     android:textSize="18sp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">

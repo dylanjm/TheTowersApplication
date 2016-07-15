@@ -7,11 +7,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import com.google.android.gms.appdatasearch.GetRecentContextCall;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,7 +25,7 @@ public class PendingRequestsActivity extends AppCompatActivity {
     final List<Request> requests = new ArrayList<>();
 
     /**************************************************
-     * SET CURRENT USER - retrieves data from firebase
+     * ON RESUME
      **************************************************/
     @Override
     protected void onResume(){
@@ -36,7 +33,7 @@ public class PendingRequestsActivity extends AppCompatActivity {
     }
 
     /**************************************************
-     * SET CURRENT USER - retrieves data from firebase
+     * GENERATE LIST
      **************************************************/
     void generateList(){
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -44,8 +41,6 @@ public class PendingRequestsActivity extends AppCompatActivity {
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        // Get user value
-
                         Request request;
                         int eCount = 0;
 
@@ -62,7 +57,6 @@ public class PendingRequestsActivity extends AppCompatActivity {
 
                         displayList();
                     }
-
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                         System.out.println("getUser:onCancelled");
@@ -71,17 +65,17 @@ public class PendingRequestsActivity extends AppCompatActivity {
     }
 
     /**************************************************
-     * SET CURRENT USER - retrieves data from firebase
+     * DISPLAY LIST
      **************************************************/
     void displayList(){
         context = getApplicationContext();
-        CustomListAdapter customAdapter = new CustomListAdapter(context, R.layout.customlayout, requests);
+        CustomListAdapter customAdapter = new CustomListAdapter(context, R.layout.maitenence_layout, requests);
         customAdapter.notifyDataSetChanged();
         listView.setAdapter(customAdapter);
     }
 
     /**************************************************
-     * SET CURRENT USER - retrieves data from firebase
+     * INITALIZE BUTTONS
      **************************************************/
     void initializeButtons(){
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -98,13 +92,14 @@ public class PendingRequestsActivity extends AppCompatActivity {
                 bundle.putString("key", bundleRequest.getKey());
                 Intent intent = new Intent("android.intent.action.MAINTENANCEREQUEST");
                 intent.putExtras(bundle);
+                //Start Maintenance Request Activity
                 startActivity(intent);
             }
         });
     }
 
     /**************************************************
-     * SET CURRENT USER - retrieves data from firebase
+     * ON CREATE - activity runs from here
      **************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +107,7 @@ public class PendingRequestsActivity extends AppCompatActivity {
         Resources res = getApplicationContext().getResources();
         setContentView(R.layout.activity_pending_requests);
         getWindow().getDecorView().setBackgroundColor(res.getColor(R.color.darkTheme));
+
         listView = (ListView) findViewById(R.id.listView);
         generateList();
         initializeButtons();

@@ -22,15 +22,15 @@
         android:text="Maintenance Requests"
         android:textSize="30dp"
         android:textStyle="bold"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textColor="#c3bfbf" />
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView"
         android:textColor="@android:color/black"
-        android:layout_below="@+id/textView9"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="49dp" />
+        android:layout_below="@+id/textView9" />
 </RelativeLayout>

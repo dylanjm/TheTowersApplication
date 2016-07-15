@@ -1,9 +1,7 @@
 package com.example.dylanmcdowell.thetowersapplication;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.ScaleDrawable;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +25,7 @@ public class CustomListAdapter extends ArrayAdapter<Request> {
             System.out.println("V == null");
             LayoutInflater vi;
             vi = LayoutInflater.from(getContext());
-            v = vi.inflate(R.layout.customlayout, parent, false);
+            v = vi.inflate(R.layout.maitenence_layout, parent, false);
         }
 
         Request p = getItem(position);
