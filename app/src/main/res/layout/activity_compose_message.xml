@@ -12,18 +12,6 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText9"
-        android:hint="Recipient"
-        android:layout_marginTop="61dp"
-        android:layout_below="@+id/textView8"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/button12"
-        android:layout_alignEnd="@+id/button12" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:ems="10"
         android:id="@+id/editText3"
@@ -41,7 +29,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/editText4"
         android:hint="Subject"
-        android:layout_below="@+id/editText9"
+        android:layout_below="@+id/spinner"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/button12"
@@ -90,9 +78,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/spinner"
         android:layout_below="@+id/textView8"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/button12"
-        android:layout_alignEnd="@+id/button12" />
+        android:layout_alignEnd="@+id/button12"
+        android:layout_marginTop="54dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

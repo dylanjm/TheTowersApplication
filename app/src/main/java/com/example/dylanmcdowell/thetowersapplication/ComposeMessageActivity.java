@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,6 +31,8 @@ public class ComposeMessageActivity extends AppCompatActivity {
     private static final String FIREBASE_URL = "https://android-chat.firebaseio-demo.com";
     private String senderName;
     User theUser;
+    User bundleUser;
+    String theRecipient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +71,18 @@ public class ComposeMessageActivity extends AppCompatActivity {
                     }
                 });
 
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                bundleUser = users.get(position);
+                theRecipient = bundleUser.getEmail().replace(".","*%*");
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                //do stuff
+            }
+        });
+
         mDatabase.child("Users").child(username).addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
@@ -84,7 +99,6 @@ public class ComposeMessageActivity extends AppCompatActivity {
 
 
         send = (Button) findViewById(R.id.button11);
-        recipientString = (EditText) findViewById(R.id.editText9);
         topicString = (EditText) findViewById(R.id.editText4);
         messageString = (EditText) findViewById(R.id.editText3);
         send.setOnClickListener(new View.OnClickListener() {
@@ -94,13 +108,11 @@ public class ComposeMessageActivity extends AppCompatActivity {
                     System.out.println(senderName);
                     String subject = topicString.getText().toString();
                     String body = messageString.getText().toString();
-                    String recipient = recipientString.getText().toString();
-                    recipient = recipient.replace(".", "*%*");
-                    recipient = "Users/" + recipient + "/messages";
-                    DatabaseReference myRef = database.getReference(recipient);
+                    theRecipient = "Users/" + theRecipient + "/messages";
+                    DatabaseReference myRef = database.getReference(theRecipient);
 
                     System.out.println(subject + body);
-                    Message chat = new Message(subject, body, senderName, recipient);
+                    Message chat = new Message(subject, body, senderName, theRecipient);
                     // Create a new, auto-generated child of that chat location, and save our chat data there
                     myRef.push().setValue(chat);
                     try {
