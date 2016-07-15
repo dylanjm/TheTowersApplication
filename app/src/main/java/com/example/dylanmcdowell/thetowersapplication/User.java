@@ -1,15 +1,8 @@
 package com.example.dylanmcdowell.thetowersapplication;
 
-import android.view.View;
-import android.widget.Button;
-
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class User {
     //Logistic Variables
@@ -22,6 +15,11 @@ public class User {
     private String aptNumber;
     private Boolean isStaff;
     private Boolean isLogged;
+
+    @Override
+    public String toString() {
+        return "\n" + this.firstName + " " + this.lastName + "\n(" + this.email + ")" + "\n";
+    }
 
     User(){}
 

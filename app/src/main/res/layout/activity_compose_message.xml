@@ -85,4 +85,14 @@
         android:textSize="30sp"
         android:textStyle="bold" />
 
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner"
+        android:layout_below="@+id/textView8"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/button12"
+        android:layout_alignEnd="@+id/button12" />
+
 </RelativeLayout>

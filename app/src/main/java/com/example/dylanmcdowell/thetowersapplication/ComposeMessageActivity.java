@@ -1,10 +1,13 @@
 package com.example.dylanmcdowell.thetowersapplication;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -14,10 +17,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ComposeMessageActivity extends AppCompatActivity {
     EditText topicString;
     EditText messageString;
     EditText recipientString;
+    Spinner spinner;
+    ArrayAdapter<User> listAdapter;
     Button send;
     private static final String FIREBASE_URL = "https://android-chat.firebaseio-demo.com";
     private String senderName;
@@ -28,11 +36,37 @@ public class ComposeMessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compose_message);
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final List<User> users = new ArrayList<>();
 
+        spinner = (Spinner) findViewById(R.id.spinner);
         FirebaseAuth fauth = FirebaseAuth.getInstance();
         FirebaseUser user = fauth.getCurrentUser();
         final String username =  user.getEmail().replace(".","*%*");
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        mDatabase.child("Users").addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // Get user value
+                        Context context = getApplicationContext();
+
+                        User user;
+
+                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                            user = child.getValue(User.class);
+                            users.add(user);
+                        }
+
+                        listAdapter = new ArrayAdapter<>(context, R.layout.customlayout, users);
+                        spinner.setAdapter(listAdapter);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        System.out.println("getUser:onCancelled");
+                    }
+                });
 
         mDatabase.child("Users").child(username).addListenerForSingleValueEvent(
                 new ValueEventListener() {
@@ -47,6 +81,7 @@ public class ComposeMessageActivity extends AppCompatActivity {
                         //Log.w(TAG, "getUser:onCancelled", databaseError.toException());
                     }
                 });
+
 
         send = (Button) findViewById(R.id.button11);
         recipientString = (EditText) findViewById(R.id.editText9);
