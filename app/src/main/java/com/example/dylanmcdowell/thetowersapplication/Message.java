@@ -69,4 +69,6 @@ public class Message {
      */
     public String getRecipient() { return recipient; }
 
+    public void setRecipient(String theRecipient) {recipient = theRecipient;}
+
 }
