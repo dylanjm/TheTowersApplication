@@ -62,7 +62,7 @@ public class InboxActivity extends AppCompatActivity {
                     }
                 });
 
-        mDatabase.child("Public").child("messages").addListenerForSingleValueEvent(
+        mDatabase.child("Public").addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
