@@ -3,4 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="emergencyColor">#e2a63e3e</color>
+    <color name="emergencyBorderColor">#f5710101</color>
+    <color name="nonEmergencyColor">#ece1fdd7</color>
+    <color name="nonEmergencyBorderColor">#f79b9292</color>
+    <color name="darkTheme">#3c3f41</color>
 </resources>

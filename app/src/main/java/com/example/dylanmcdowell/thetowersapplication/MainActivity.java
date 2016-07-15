@@ -1,6 +1,7 @@
 package com.example.dylanmcdowell.thetowersapplication;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -74,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         composeMessage1 = (ImageButton) findViewById(R.id.imageButton2);
         composeMessage1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                Log.d(TAG, "VIEW REQUESTS1 - ON CLICK!");
                 Intent composeMessage = new Intent("android.intent.action.COMPOSEMESSAGE");
                 startActivity(composeMessage);
             }
@@ -104,7 +106,8 @@ public class MainActivity extends AppCompatActivity {
         viewRequests = (Button) findViewById(R.id.button5);
         viewRequests.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent pendingRequests = new Intent("android.intent.action.PENDINGREQUESTS");
+                Log.d(TAG, "VIEW REQUESTS - ON CLICK!");
+                Intent pendingRequests = new Intent(getApplicationContext(), PendingRequestsActivity.class);
                 startActivity(pendingRequests);
             }
         });
@@ -131,7 +134,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         };
-
         //Create all the Buttons
         initializeButtons();
     }

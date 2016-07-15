@@ -2,6 +2,7 @@ package com.example.dylanmcdowell.thetowersapplication;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.appdatasearch.GetRecentContextCall;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,24 +22,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PendingRequestsActivity extends AppCompatActivity {
-    TextView textView;
+    //Element Variables
     ListView listView;
-    ArrayAdapter<Request> listAdapter;
+    Context context;
+    final List<Request> requests = new ArrayList<>();
 
+    /**************************************************
+     * SET CURRENT USER - retrieves data from firebase
+     **************************************************/
     @Override
     protected void onResume(){
         super.onResume();
-        generateList();
     }
 
+    /**************************************************
+     * SET CURRENT USER - retrieves data from firebase
+     **************************************************/
     void generateList(){
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        final List<Request> requests = new ArrayList<>();
         mDatabase.child("Requests").addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        Context context = getApplicationContext();
+                        // Get user value
 
                         Request request;
                         int eCount = 0;
@@ -45,19 +52,15 @@ public class PendingRequestsActivity extends AppCompatActivity {
                         for (DataSnapshot child : dataSnapshot.getChildren()) {
                             request = child.getValue(Request.class);
                             request.setKey(child.getKey());
-                            System.out.println(request.getAptNumber());
                             if(request.getIsEmergency()) {
-                                requests.add(eCount, request);
-
+                                requests.add(0, request);
                                 eCount++;
                             }
                             else
-                                requests.add(request);
+                                requests.add(eCount, request);
                         }
 
-                        listAdapter = new ArrayAdapter<>(context, R.layout.customlayout, requests);
-                        listAdapter.notifyDataSetChanged();
-                        listView.setAdapter(listAdapter);
+                        displayList();
                     }
 
                     @Override
@@ -65,15 +68,27 @@ public class PendingRequestsActivity extends AppCompatActivity {
                         System.out.println("getUser:onCancelled");
                     }
                 });
+    }
 
+    /**************************************************
+     * SET CURRENT USER - retrieves data from firebase
+     **************************************************/
+    void displayList(){
+        context = getApplicationContext();
+        CustomListAdapter customAdapter = new CustomListAdapter(context, R.layout.customlayout, requests);
+        customAdapter.notifyDataSetChanged();
+        listView.setAdapter(customAdapter);
+    }
 
-
+    /**************************************************
+     * SET CURRENT USER - retrieves data from firebase
+     **************************************************/
+    void initializeButtons(){
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Bundle bundle = new Bundle();
                 Request bundleRequest = requests.get(position);
-
                 bundle.putString("subject", bundleRequest.getSubject());
                 bundle.putString("body", bundleRequest.getBody());
                 bundle.putString("sender", bundleRequest.getSender());
@@ -88,14 +103,17 @@ public class PendingRequestsActivity extends AppCompatActivity {
         });
     }
 
+    /**************************************************
+     * SET CURRENT USER - retrieves data from firebase
+     **************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Resources res = getApplicationContext().getResources();
         setContentView(R.layout.activity_pending_requests);
-
-
-        textView = (TextView) findViewById(R.id.textView9);
+        getWindow().getDecorView().setBackgroundColor(res.getColor(R.color.darkTheme));
         listView = (ListView) findViewById(R.id.listView);
         generateList();
+        initializeButtons();
     }
 }

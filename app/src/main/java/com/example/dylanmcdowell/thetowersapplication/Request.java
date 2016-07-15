@@ -11,15 +11,13 @@ public class Request {
 
     @Override
     public String toString() {
-        return "\n"
-                + this.subject + this.getEmergencyMessage()
+        return "<b>Apt: </b>" + this.aptNumber
                 + "\n"
-                + this.aptNumber
+                + "<b>From: </b>" + this.sender
                 + "\n"
-                + this.timeStamp.replace("_", " ")
+                + "<b>Issue: </b>" + this.subject
                 + "\n"
-                + "From: " + this.sender
-                + "\n";
+                + "<b>Time: </b>" + this.timeStamp.replace("_0", " ").replace("_", " ");
     }
 
     //Default Constructor

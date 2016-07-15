@@ -2,6 +2,9 @@ package com.example.dylanmcdowell.thetowersapplication;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ScaleDrawable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,40 +13,41 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class CustomListAdapter extends ArrayAdapter {
-    private Context mContext;
-    private int id;
-    private List<Request> items ;
+public class CustomListAdapter extends ArrayAdapter<Request> {
 
-    public CustomListAdapter(Context context, int textViewResourceId , List<Request> list )
-    {
-        super(context, textViewResourceId, list);
-        mContext = context;
-        id = textViewResourceId;
-        items = list ;
+    public CustomListAdapter(Context context, int resource, List<Request> requests) {
+        super(context, resource, requests);
     }
 
     @Override
-    public View getView(int position, View v, ViewGroup parent)
-    {
-        View mView = v ;
-        if(mView == null){
-            LayoutInflater vi = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            mView = vi.inflate(id, null);
+    public View getView(int position, View convertView, ViewGroup parent) {
+
+        View v = convertView;
+        if (v == null) {
+            System.out.println("V == null");
+            LayoutInflater vi;
+            vi = LayoutInflater.from(getContext());
+            v = vi.inflate(R.layout.customlayout, parent, false);
         }
 
-        TextView text = (TextView) mView.findViewById(R.id.textView9);
-        if(items.get(position) != null)
-        {
-            text.setTextColor(Color.WHITE);
-            //text.setText(items.get(position));
-            text.setBackgroundColor(Color.RED);
-            int color = Color.argb( 200, 255, 64, 64 );
-            text.setBackgroundColor( color );
+        Request p = getItem(position);
+        if (p != null) {
+            TextView tt1 = (TextView) v.findViewById(R.id.textView9);
+            if (tt1 != null) {
+                if(p.getIsEmergency()){
+                    Drawable emergency = getContext().getResources().getDrawable(R.drawable.emergency);
+                    emergency.setBounds(0, 0,(emergency.getIntrinsicWidth()*3),(emergency.getIntrinsicHeight()*2));
+                    tt1.setCompoundDrawables(null, null, emergency, null);
+                    tt1.setText(Html.fromHtml(p.toString().replace("\n","<br />")));
+                    tt1.setBackground(getContext().getResources().getDrawable(R.drawable.border));
+                } else {
+                    tt1.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+                    tt1.setText(Html.fromHtml(p.toString().replace("\n","<br />")));
+                    tt1.setBackground(getContext().getResources().getDrawable(R.drawable.border2));
+                }
+            }
         }
-
-        return mView;
+        return v;
     }
-
 }
 

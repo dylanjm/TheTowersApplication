@@ -22,11 +22,11 @@ public class MaintenanceRequestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maintenance_request);
 
-        subject = (TextView) findViewById(R.id.textView2);
-        sender = (TextView) findViewById(R.id.textView4);
-        timeStamp = (TextView) findViewById(R.id.textView17);
-        roomNum = (TextView) findViewById(R.id.textView18);
-        body = (TextView) findViewById(R.id.textView5);
+        subject     = (TextView) findViewById(R.id.textView2);
+        sender      = (TextView) findViewById(R.id.textView4);
+        timeStamp   = (TextView) findViewById(R.id.textView17);
+        roomNum     = (TextView) findViewById(R.id.textView18);
+        body        = (TextView) findViewById(R.id.textView5);
         isEmergency = (TextView) findViewById(R.id.textView19);
 
         Bundle bundle2 = getIntent().getExtras();
